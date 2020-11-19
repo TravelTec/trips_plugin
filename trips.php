@@ -2,7 +2,7 @@
 /*
 	Plugin Name: WP Viagens
 	Description: This is for updating your Wordpress plugin.
-	Version: 1.6
+	Version: 1.7
 	Author: Travel Tec
 	Author URI: https://traveltec.com
 */
