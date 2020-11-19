@@ -7,7 +7,7 @@
 	Author URI: https://traveltec.com.br
 */
 if( ! class_exists( 'Smashing_Updater' ) ){
-	include_once( plugin_dir_path( __FILE__ ) . 'updater.php' );
+	include_once( 'updater.php' );
 }
 
 $updater = new Smashing_Updater( __FILE__ );
