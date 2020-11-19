@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: WP GitHub Plugin Updater Test
-Plugin URI: https://github.com/jkudish/WordPress-GitHub-Plugin-Updater
-Description: Semi-automated test for the GitHub Plugin Updater
-Version: 0.1
-Author: Joachim Kudish
-Author URI: http://jkudish.com/
+Plugin Name: WP Viagens
+Plugin URI: https://github.com/TravelTec/trips_plugin
+Description: Plugin de roteiros 
+Version: 1.1
+Author: Travel Tec
+Author URI: https://traveltec.com.br
 License: GPLv2
 */
 
@@ -44,11 +44,11 @@ function github_plugin_updater_test_init() {
 
 		$config = array(
 			'slug' => plugin_basename( __FILE__ ),
-			'proper_folder_name' => 'github-updater',
-			'api_url' => 'https://api.github.com/repos/jkudish/WordPress-GitHub-Plugin-Updater',
-			'raw_url' => 'https://raw.github.com/jkudish/WordPress-GitHub-Plugin-Updater/master',
-			'github_url' => 'https://github.com/jkudish/WordPress-GitHub-Plugin-Updater',
-			'zip_url' => 'https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/archive/master.zip',
+			'proper_folder_name' => 'trips_plugin',
+			'api_url' => 'https://api.github.com/repos/TravelTec/trips_plugin',
+			'raw_url' => 'https://raw.github.com/TravelTec/trips_plugin/main',
+			'github_url' => 'https://github.com/TravelTec/trips_plugin',
+			'zip_url' => 'https://github.com/TravelTec/trips_plugin/archive/master.zip',
 			'sslverify' => true,
 			'requires' => '3.0',
 			'tested' => '3.3',
