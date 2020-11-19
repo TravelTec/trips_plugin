@@ -2,8 +2,8 @@
 /*
 Plugin Name: WP Viagens
 Plugin URI: https://github.com/TravelTec/trips_plugin
-Description: Semi-automated test for the GitHub Plugin Updater
-Version: 1.8
+Description: Plugin de roteiros - teste de atualização
+Version: 1.9
 Author: Travel Tec
 Author URI: https://traveltec.com.br
 License: GPLv2
