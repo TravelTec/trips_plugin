@@ -86,7 +86,7 @@ define( 'WP_TRAVEL_ENGINE_PLUGIN_LICENSE_PAGE', 'wp_travel_engine_license_page' 
 /**
  * Load plugin updater file
  */
-require plugin_dir_path( __FILE__ ) . 'plugin-updater.php';
+require plugin_dir_path( __FILE__ ) . 'updater.php';
 
 /**
  * The code that runs during plugin activation.
