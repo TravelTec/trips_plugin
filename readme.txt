@@ -1,3 +1,3 @@
 === WP Viagens ===
 
-~Current Version:1.14~ 
+~Current Version:1.15~ 
