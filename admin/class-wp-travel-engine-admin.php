@@ -187,8 +187,8 @@ class Wp_Travel_Engine_Admin
 		$labels = array(
 			'name'               => _x('Viagens', 'post type general name', 'wp-travel-engine'),
 			'singular_name'      => _x('Trip', 'post type singular name', 'wp-travel-engine'),
-			'menu_name'          => _x('Roteiros', 'admin menu', 'wp-travel-engine'),
-			'name_admin_bar'     => _x('Roteiros', 'add new on admin bar', 'wp-travel-engine'),
+			'menu_name'          => _x('Roteiros 2', 'admin menu', 'wp-travel-engine'),
+			'name_admin_bar'     => _x('Roteiros 2', 'add new on admin bar', 'wp-travel-engine'),
 			'add_new'            => _x('Novo roteiro', 'Trip', 'wp-travel-engine'),
 			'add_new_item'       => __('Novo roteiro', 'wp-travel-engine'),
 			'new_item'           => __('Novo roteiro', 'wp-travel-engine'),
