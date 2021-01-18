@@ -3,8 +3,8 @@ Contributors: Travel Tec
 Donate link: https://traveltec.com.br/
 Tags: trips, travel, themes
 Requires at least: 4.7
-Tested up to: 5.4
-Stable tag: 1.0.7
+Tested up to: 5.5
+Stable tag: 1.0.8
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html

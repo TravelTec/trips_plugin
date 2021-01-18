@@ -83,7 +83,7 @@ $default_pricing_options =
                 $label_campo = 'Grupo';
             }
 
-            $pricing_option_label = isset( $label_campo ) ?  $label_campo : ucfirst( $option );
+            $pricing_option_label = $label_campo;
 
             // $price =  $wte_trip_settings['multiple_pricing'][esc_attr( $option )]['price'];
 
@@ -134,7 +134,7 @@ $default_pricing_options =
                         </label>
                         <div class="wpte-floated">
                             <input required type="text" name="wp_travel_engine_setting[multiple_pricing][<?php echo esc_attr( $option ); ?>][label]" id="wp_travel_engine_setting[multiple_pricing][<?php echo esc_attr( $option ); ?>][label]" 
-                        value="<?php echo esc_attr( $pricing_option_label ); ?>"
+                        value="<?php echo $label_campo; ?>"
                         placeholder="<?php _e( 'Nome da opção', 'wp-travel-engine' ); ?>" />
                         </div>
                         <span class="wpte-tooltip"><?php echo esc_html( sprintf( __( 'O nome do campo para %1$s. Esse valor será exibido na seleção do passageiro no formulário de reserva.', 'wp-travel-engine' ), $mp_label ) ); ?></span>
