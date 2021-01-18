@@ -4,11 +4,45 @@ Plugin Name: WP Viagens
 Plugin URI: https://github.com/TravelTec/trips_plugin
 GitHub Plugin URI: https://github.com/TravelTec/trips_plugin
 Description: WP Viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus roteiros, compartilhar promoções, gerenciar suas reservas e manter contato com os clientes que desejam saber mais sobre seus pacotes. Tudo de forma rápida e intuitiva. 
-Version: 1.22
+Version: 1.0.0
 Author: Travel Tec
 Author URI: https://traveltec.com.br
 License: GPLv2
 */
+
+/*
+ * Plugin Update Checker
+ * 
+ * Note: If you're using the Composer autoloader, you don't need to explicitly require the library.
+ * @link https://github.com/YahnisElsts/plugin-update-checker
+ */
+require_once 'plugin-update-checker-4.10/plugin-update-checker.php';
+
+
+/*
+ * Plugin Update Checker Setting
+ *
+ * @see https://github.com/YahnisElsts/plugin-update-checker for more details.
+ */
+function my_plugin_update_checker_setting() {
+    if ( ! is_admin() || ! class_exists( 'Puc_v4_Factory' ) ) {
+        return;
+    }
+
+    $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+        'https://github.com/TravelTec/trips_plugin',
+        __FILE__,
+        'trips_plugin'
+    );
+    
+    // (Opcional) If you're using a private repository, specify the access token like this:
+    $myUpdateChecker->setAuthentication('your-token-here');
+
+    // (Opcional) Set the branch that contains the stable release.
+    $myUpdateChecker->setBranch('main');
+}
+
+add_action( 'admin_init', 'my_plugin_update_checker_setting' );
 
  // Freemius
 if ( ! function_exists( 'wte_fs' ) ) {
