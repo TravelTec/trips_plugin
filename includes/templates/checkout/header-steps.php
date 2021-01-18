@@ -34,14 +34,14 @@ endif;
 
 $checkout_current_step = apply_filters( 'wp_travel_engine_checkout_current_step', array( 
     'checkout' => array(
-        'label' => __( 'Detalhes de pagamento', 'wp-travel-engine' ),
+        'label' => __( 'Dados do solicitante', 'wp-travel-engine' ),
         'class' => 'active'
     )
 ) );
 
 $checkout_remaining_step = apply_filters( 'wp_travel_engine_checkout_remaining_steps', array(
     'payment' => array(
-        'label' => __( 'Pagamento', 'wp-travel-engine' ),
+        'label' => __( 'Confirmação da pré reserva', 'wp-travel-engine' ),
         'class' => ''
     )
 ) );
