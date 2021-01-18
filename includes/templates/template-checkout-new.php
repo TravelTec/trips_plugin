@@ -65,7 +65,7 @@
             <?php  if ( ! empty( $checkout_fields ) && is_array( $checkout_fields ) ) : ?>
                 <div class="wpte-bf-checkout-form">
                     <?php do_action('wp_travel_engine_before_billing_form'); ?>
-                    <div class="wpte-bf-title"><?php echo apply_filters( 'wpte_billings_details_title', esc_html__( 'Detalhes da sua reserva', 'wp-travel-engine' ) ); ?></div>
+                    <div class="wpte-bf-title"><?php echo apply_filters( 'wpte_billings_details_title', esc_html__( 'Dados do solicitante', 'wp-travel-engine' ) ); ?></div>
                     <form id="wp-travel-engine-new-checkout-form" method="POST" name="wp_travel_engine_new_checkout_form" action="" enctype= "multipart/form-data"
 					class="">
                         <input type="hidden" name="action" value="wp_travel_engine_new_booking_process_action">
