@@ -51,7 +51,17 @@ $default_pricing_options =
 
             endif;
 
-            $pricing_option_label = isset( $wte_trip_settings['multiple_pricing'][esc_attr( $option )]['label'] ) ?  $wte_trip_settings['multiple_pricing'][esc_attr( $option )]['label'] : ucfirst( $option );
+            if ($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['label'] == 'Adult') {
+                $label_campo = 'Adulto';
+            }else if ($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['label'] == 'Child') {
+                $label_campo = 'Criança';
+            }else if ($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['label'] == 'Infant') {
+                $label_campo = 'Bebê';
+            }else if ($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['label'] == 'Group') {
+                $label_campo = 'Grupo';
+            }
+
+            $pricing_option_label = isset( $label_campo ) ?  $label_campo : ucfirst( $option );
 
             // $price =  $wte_trip_settings['multiple_pricing'][esc_attr( $option )]['price'];
 
