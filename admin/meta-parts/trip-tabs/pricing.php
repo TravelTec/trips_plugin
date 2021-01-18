@@ -73,13 +73,13 @@ $default_pricing_options =
 
             endif;
 
-            if ($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['label'] == 'Adult') {
+            if ($option == 'Adult') {
                 $label_campo = 'Adulto';
-            }else if ($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['label'] == 'Child') {
+            }else if ($option == 'Child') {
                 $label_campo = 'Criança';
-            }else if ($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['label'] == 'Infant') {
+            }else if ($option == 'Infant') {
                 $label_campo = 'Bebê';
-            }else if ($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['label'] == 'Group') {
+            }else if ($option == 'Group') {
                 $label_campo = 'Grupo';
             }
 

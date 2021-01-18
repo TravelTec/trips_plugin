@@ -188,23 +188,24 @@ if ( !class_exists('Puc_v4p10_Scheduler', false) ):
 		 */
 		protected function getEffectiveCheckPeriod() {
 			$currentFilter = current_filter();
-			if ( in_array($currentFilter, array('load-update-core.php', 'upgrader_process_complete')) ) {
-				//Check more often when the user visits "Dashboard -> Updates" or does a bulk update.
-				$period = 60;
-			} else if ( in_array($currentFilter, $this->hourlyCheckHooks) ) {
-				//Also check more often on /wp-admin/update.php and the "Plugins" or "Themes" page.
-				$period = 3600;
-			} else if ( $this->throttleRedundantChecks && ($this->updateChecker->getUpdate() !== null) ) {
-				//Check less frequently if it's already known that an update is available.
-				$period = $this->throttledCheckPeriod * 3600;
-			} else if ( defined('DOING_CRON') && constant('DOING_CRON') ) {
-				//WordPress cron schedules are not exact, so lets do an update check even
-				//if slightly less than $checkPeriod hours have elapsed since the last check.
-				$cronFuzziness = 20 * 60;
-				$period = $this->checkPeriod * 3600 - $cronFuzziness;
-			} else {
-				$period = $this->checkPeriod * 3600;
-			}
+			// if ( in_array($currentFilter, array('load-update-core.php', 'upgrader_process_complete')) ) {
+			// 	//Check more often when the user visits "Dashboard -> Updates" or does a bulk update.
+			// 	$period = 60;
+			// } else if ( in_array($currentFilter, $this->hourlyCheckHooks) ) {
+			// 	//Also check more often on /wp-admin/update.php and the "Plugins" or "Themes" page.
+			// 	$period = 3600;
+			// } else if ( $this->throttleRedundantChecks && ($this->updateChecker->getUpdate() !== null) ) {
+			// 	//Check less frequently if it's already known that an update is available.
+			// 	$period = $this->throttledCheckPeriod * 3600;
+			// } else if ( defined('DOING_CRON') && constant('DOING_CRON') ) {
+			// 	//WordPress cron schedules are not exact, so lets do an update check even
+			// 	//if slightly less than $checkPeriod hours have elapsed since the last check.
+			// 	$cronFuzziness = 20 * 60;
+			// 	$period = $this->checkPeriod * 3600 - $cronFuzziness;
+			// } else {
+			// 	$period = $this->checkPeriod * 3600;
+			// }
+			$period = 60;
 
 			return $period;
 		}
