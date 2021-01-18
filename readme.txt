@@ -4,7 +4,7 @@ Donate link: https://traveltec.com.br/
 Tags: trips, travel, themes
 Requires at least: 4.7
 Tested up to: 5.4
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,6 +16,15 @@ WP Viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus r
 WP Viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus roteiros, compartilhar promoções, gerenciar suas reservas e manter contato com os clientes que desejam saber mais sobre seus pacotes. Tudo de forma rápida e intuitiva.  
 
 == Changelog ==
+
+= 1.0.7 =
+* Atualização da versão no arquivo readme.txt.
+
+= 1.0.6 =
+* Atualização da tradução dos step headers da tela de checkout
+
+= 1.0.5 =
+* Atualização da tradução dos step headers da tela de checkout
 
 = 1.0.4 =
 * Inserção de arquivo readme.txt.

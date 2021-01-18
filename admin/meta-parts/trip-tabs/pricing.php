@@ -16,6 +16,8 @@ if ( ! is_object( $post ) && defined( 'DOING_AJAX' ) && DOING_AJAX ) {
  * Pricing Options Settings.
  */
 $wte_trip_settings = get_post_meta( $post_id, 'wp_travel_engine_setting', true );  
+
+
 // default options.
 $default_pricing_options = 
     array( 
@@ -27,6 +29,26 @@ $default_pricing_options =
     $saved_pricing_options = $default_pricing_options;
     ?>
     <div class="wpte-multi-pricing-wrap">
+        <div class="wpte-field wpte-number wpte-floated">
+                        <label class="wpte-field-label">
+                            Moeda                    </label>
+                        <div class="wpte-floated"> 
+                            <span> 
+                                <select class="wpte-sublabel" name="wp_travel_engine_setting[multiple_pricing][adult][currency_code]" id="wp_travel_engine_setting[multiple_pricing][adult][currency_code]">
+                                    <option value="0">Moeda</option>
+                                    <option value="R$"  <?=($wte_trip_settings['multiple_pricing']['adult']['currency_code'] == 'R$' ? 'selected' : '')?>>R$</option>
+                                    <option value="USD" <?=($wte_trip_settings['multiple_pricing']['adult']['currency_code'] == 'USD' ? 'selected' : '')?>>USD</option>
+                                    <option value="U$" <?=($wte_trip_settings['multiple_pricing']['adult']['currency_code'] == 'U$' ? 'selected' : '')?>>U$</option>
+                                    <option value="EUR" <?=($wte_trip_settings['multiple_pricing']['adult']['currency_code'] == 'EUR' ? 'selected' : '')?>>EUR</option>
+                                    <option value="CAN"  <?=($wte_trip_settings['multiple_pricing']['adult']['currency_code'] == 'CAN' ? 'selected' : '')?>>CAN</option>
+                                    <option value="AUS" <?=($wte_trip_settings['multiple_pricing']['adult']['currency_code'] == 'AUS' ? 'selected' : '')?>>AUS</option>
+                                    <option value="NZ" <?=($wte_trip_settings['multiple_pricing']['adult']['currency_code'] == 'NZ' ? 'selected' : '')?>>NZ</option>
+                                    <option value="GBP" <?=($wte_trip_settings['multiple_pricing']['adult']['currency_code'] == 'GBP' ? 'selected' : '')?>>GBP</option>
+                                </select>
+                            </span> 
+                        </div>
+                        <span class="wpte-tooltip">Essa será a moeda utilizada para o roteiro.</span>
+                    </div>
         <?php
         // Pricing Loop Start.
         foreach( $saved_pricing_options as $option => $label ) :
@@ -96,7 +118,7 @@ $default_pricing_options =
                 <div class="wpte-field wpte-multi-fields">
                     <div class="wpte-field wpte-floated">
                         <label for="wp_travel_engine_setting[multiple_pricing][<?php echo esc_attr( $option ); ?>][label]" class="wpte-field-label">
-                            <?php		
+                            <?php       
                                 $mp_label = ucfirst( $option );
                                 if ($mp_label == 'Adult') {
                                     $mp_label = 'Adulto';
@@ -119,7 +141,7 @@ $default_pricing_options =
                     </div>
                     <div class="wpte-field wpte-number wpte-floated">
                         <label class="wpte-field-label">
-                            <?php		
+                            <?php       
                                 $mp_label = ucfirst( $option );
                                 if ($mp_label == 'Adult') {
                                     $mp_label = 'Adulto';
@@ -138,21 +160,7 @@ $default_pricing_options =
                                 id="wp_travel_engine_setting[multiple_pricing][<?php echo esc_attr( $option ); ?>][price]" 
                                 <?php echo esc_attr( $bind ); ?>
                                 value="<?php echo esc_attr( $pricing_option_price ); ?>"
-                                placeholder="<?php _e( 'Valor regular', 'wp-travel-engine' ); ?>" style="width: 40%;margin-right: 13px"/>
-                            <span> 
-                                <select class="wpte-sublabel" name="wp_travel_engine_setting[multiple_pricing][<?php echo esc_attr( $option ); ?>][currency_code]" 
-                                id="wp_travel_engine_setting[multiple_pricing][<?php echo esc_attr( $option ); ?>][currency_code]" >
-                                    <option value="0" <?=(empty($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code']) ? 'selected' : '')?>>Moeda</option>
-                                    <option value="R$" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code'] == 'R$' ? 'selected' : '')?>>R$</option>
-                                    <option value="USD" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code'] == 'USD' ? 'selected' : '')?>>USD</option>
-                                    <option value="U$" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code'] == 'U$' ? 'selected' : '')?>>U$</option>
-                                    <option value="EUR" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code'] == 'EUR' ? 'selected' : '')?>>EUR</option>
-                                    <option value="CAN" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code'] == 'CAN' ? 'selected' : '')?>>CAN</option>
-                                    <option value="AUS" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code'] == 'AUS' ? 'selected' : '')?>>AUS</option>
-                                    <option value="NZ" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code'] == 'NZ' ? 'selected' : '')?>>NZ</option>
-                                    <option value="GBP" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code'] == 'GBP' ? 'selected' : '')?>>GBP</option>
-                                </select>
-                            </span> 
+                                placeholder="<?php _e( 'Valor regular', 'wp-travel-engine' ); ?>" style="width: 40%;margin-right: 13px"  onKeyPress="return(moeda(this,'.',',',event))"/> 
                         </div>
                         <span class="wpte-tooltip"><?php echo esc_html( sprintf( __( 'Informe o valor para o passageiro do tipo %1$s. O valor informado será aplicado como base tarifária para %2$s.', 'wp-travel-engine' ), $mp_label, $mp_label ) ); ?></span>
                     </div>
@@ -174,22 +182,7 @@ $default_pricing_options =
                                     <input class="price_trip" <?php echo esc_attr( $bind_sale ); ?> type="text" name="wp_travel_engine_setting[multiple_pricing][<?php echo esc_attr( $option ); ?>][sale_price]" 
                                         id="wp_travel_engine_setting[multiple_pricing][<?php echo esc_attr( $option ); ?>][sale_price]" 
                                         value="<?php echo esc_attr( $pricing_option_sale_price ); ?>"
-                                        placeholder="<?php _e( 'Valor de oferta', 'wp-travel-engine' ); ?>" style="width: 57%;margin-right: 13px"/>
-                                    
-                            <span> 
-                                <select class="wpte-sublabel" name="wp_travel_engine_setting[multiple_pricing][<?php echo esc_attr( $option ); ?>][currency_code_sale]" 
-                                id="wp_travel_engine_setting[multiple_pricing][<?php echo esc_attr( $option ); ?>][currency_code_sale]" >
-                                    <option value="0" <?=(empty($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code_sale']) ? 'selected' : '')?>>Moeda</option>
-                                    <option value="R$" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code_sale'] == 'R$' ? 'selected' : '')?>>R$</option>
-                                    <option value="USD" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code_sale'] == 'USD' ? 'selected' : '')?>>USD</option>
-                                    <option value="U$" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code_sale'] == 'U$' ? 'selected' : '')?>>U$</option>
-                                    <option value="EUR" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code_sale'] == 'EUR' ? 'selected' : '')?>>EUR</option>
-                                    <option value="CAN" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code_sale'] == 'CAN' ? 'selected' : '')?>>CAN</option>
-                                    <option value="AUS" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code_sale'] == 'AUS' ? 'selected' : '')?>>AUS</option>
-                                    <option value="NZ" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code_sale'] == 'NZ' ? 'selected' : '')?>>NZ</option>
-                                    <option value="GBP" <?=($wte_trip_settings['multiple_pricing'][esc_attr( $option )]['currency_code_sale'] == 'GBP' ? 'selected' : '')?>>GBP</option>
-                                </select>
-                            </span> 
+                                        placeholder="<?php _e( 'Valor de oferta', 'wp-travel-engine' ); ?>" style="width: 65%;margin-right: 13px" onKeyPress="return(moeda(this,'.',',',event))" /> 
                                 </div>
                             </div>
                         </div>
@@ -228,9 +221,43 @@ $default_pricing_options =
             <input data-tab="pricing" data-post-id="<?php echo esc_attr( $post_id ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'wpte-trip-tab-save-continue' ) ); ?>" data-next-tab="<?php echo esc_attr( $next_tab['callback_function'] ); ?>" class="wpte_save_continue_link" type="submit" name="wpte_trip_tabs_save_continue" value="<?php _e( 'Salvar e continuar', 'wp-travel-engine' ); ?>">
         </div>
     <?php endif; ?>
-
-    <script src="https://wp02.montenegroev.com.br/wp-content/plugins/wp-travel-engine/admin/js/jquery.mask.js"></script>
+ 
     <script type="text/javascript">
-        jQuery('.price_trip').mask('000.000.000.000.000,00', {reverse: true});
+        function moeda(a, e, r, t) {
+            let n = ""
+              , h = j = 0
+              , u = tamanho2 = 0
+              , l = ajd2 = ""
+              , o = window.Event ? t.which : t.keyCode;
+              a.value = a.value.replace('R$ ','');            
+            if (n = String.fromCharCode(o),
+            -1 == "0123456789".indexOf(n))
+                return !1;
+            for (u = a.value.replace('R$ ','').length,
+            h = 0; h < u && ("0" == a.value.charAt(h) || a.value.charAt(h) == r); h++)
+                ;
+            for (l = ""; h < u; h++)
+                -1 != "0123456789".indexOf(a.value.charAt(h)) && (l += a.value.charAt(h));
+            if (l += n,
+            0 == (u = l.length) && (a.value = ""),
+            1 == u && (a.value = "0" + r + "0" + l),
+            2 == u && (a.value = "0" + r + l),
+            u > 2) {
+                for (ajd2 = "",
+                j = 0,
+                h = u - 3; h >= 0; h--)
+                    3 == j && (ajd2 += e,
+                    j = 0),
+                    ajd2 += l.charAt(h),
+                    j++;
+                for (a.value = "",
+                tamanho2 = ajd2.length,
+                h = tamanho2 - 1; h >= 0; h--)
+                    a.value += ajd2.charAt(h);
+                a.value += r + l.substr(u - 2, u)
+            }
+            return !1
+        }
+
     </script>
  
