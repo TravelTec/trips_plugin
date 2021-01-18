@@ -73,13 +73,13 @@ $default_pricing_options =
 
             endif;
 
-            if ($option == 'Adult') {
+            if ($option === 'adult') {
                 $label_campo = 'Adulto';
-            }else if ($option == 'Child') {
+            }else if ($option === 'child') {
                 $label_campo = 'Criança';
-            }else if ($option == 'Infant') {
+            }else if ($option === 'infant') {
                 $label_campo = 'Bebê';
-            }else if ($option == 'Group') {
+            }else if ($option === 'group') {
                 $label_campo = 'Grupo';
             }
 
