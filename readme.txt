@@ -35,47 +35,19 @@ WP Viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus r
 == Changelog ==
 
 
+= 1.2.0 =
 
-= 1.0.7 =
-
-* Atualização da versão no arquivo readme.txt.
-
+* Incluisão no sistema de checkout do tratamento das idades dos passageiros (criança e bebê) conforme idade declarada no cadastro do roteiro.
 
 
-= 1.0.6 =
+= 1.1.0 =
 
-* Atualização da tradução dos step headers da tela de checkout
-
-
-
-= 1.0.5 =
-
-* Atualização da tradução dos step headers da tela de checkout
-
-
-
-= 1.0.4 =
-
-* Inserção de arquivo readme.txt.
-
-
-
-= 1.0.3 =
-
-* Atualização da tradução dos step headers da tela de checkout.
-
-
-
-= 1.0.2 =
-
-* Tradução dos campos de tipo de passageiro na aba de Valores.
-
+* Inclusão do sistema de multi-datas, permitindo que o usuário passe a cadastrar várias saídas para o mesmo roteiro e que isso seja refletido no calendário.
 
 
 = 1.0.1 =
 
-* Tradução dos campos de tipo de passageiro na aba de Valores.
-
+* Tradução feita no plugin para o idioma Português do Brasil.
 
 
 = 1.0.0 =
