@@ -10,7 +10,7 @@ Requires at least: 4.7
 
 Tested up to: 5.5
 
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 
 Requires PHP: 5.4
 
@@ -33,6 +33,11 @@ WP Viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus r
 
 
 == Changelog ==
+
+
+= 1.3.0 =
+
+* Inserção do fornecedor PagSeguro como forma de recebimento, além da forma padrão apenas pré reserva.
 
 
 = 1.2.0 =
