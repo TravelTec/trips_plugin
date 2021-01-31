@@ -485,7 +485,7 @@ class WP_Travel_Engine_Template_Hooks {
 							disabled
 							data-cart-field = "travelers"
 							data-cost-field = 'travelers-cost'
-							data-type = '<?php echo apply_filters( 'wte_default_traveller_type', __( 'Person', 'wp-travel-engine' ) ); ?>'
+							data-type = '<?php echo apply_filters( 'wte_default_traveller_type', __( 'Pessoa', 'wp-travel-engine' ) ); ?>'
 							data-cost="<?php echo esc_attr( $price ); ?>" />
 						<button class="wpte-bf-plus">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M368 224H224V80c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v144H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h144v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V288h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path></svg>
@@ -494,13 +494,13 @@ class WP_Travel_Engine_Template_Hooks {
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M368 224H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h352c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path></svg>
 						</button>
 					</div>
-					<span><?php echo apply_filters( 'wte_default_traveller_type', __( 'Person', 'wp-travel-engine' ) ); ?></span>
+					<span><?php echo apply_filters( 'wte_default_traveller_type', __( 'Pessoa', 'wp-travel-engine' ) ); ?></span>
 				</div>
 				<div class="wpte-bf-price">
 					<ins>
 						<?php echo wp_travel_engine_get_formated_price_with_currency_code_symbol( $price ); ?></b>
 					</ins>
-					<span class="wpte-bf-pqty"><?php echo apply_filters( 'wte_default_traveller_unit', __( 'Per Person', 'wp-travel-engine' ) ); ?></span>
+					<span class="wpte-bf-pqty"><?php echo apply_filters( 'wte_default_traveller_unit', __( 'Por pessoa', 'wp-travel-engine' ) ); ?></span>
 				</div>
 			</div>
 		<?php
@@ -519,8 +519,13 @@ class WP_Travel_Engine_Template_Hooks {
 		$multiple_pricing_options                  = isset( $trip_settings['multiple_pricing'] ) && ! empty( $trip_settings['multiple_pricing'] ) ? $trip_settings['multiple_pricing'] : false;
 		$multiple_pricing_is_adult_price_available = $this->multiple_pricing_is_adult_price_available( $trip_id );
 
-		if ( $multiple_pricing_options && $multiple_pricing_is_adult_price_available ) :
-			foreach ( $multiple_pricing_options as $key => $pricing_option ) : 
+		$min_age_child = $trip_settings['multiple_pricing'][0]['child']['min_age'];
+		$max_age_child = $trip_settings['multiple_pricing'][0]['child']['max_age'];
+		$min_age_infant = $trip_settings['multiple_pricing'][0]['infant']['min_age'];
+		$max_age_infant = $trip_settings['multiple_pricing'][0]['infant']['max_age'];
+
+			$i = 0;
+			foreach ( $multiple_pricing_options[0] as $key => $pricing_option ) : 
 				$min_pax     = isset( $pricing_option['min_pax'] ) && ! empty( $pricing_option['min_pax'] ) ? $pricing_option['min_pax'] : 0;
 				$max_pax     = isset( $pricing_option['max_pax'] ) && ! empty( $pricing_option['max_pax'] ) ? $pricing_option['max_pax'] : 999999999;
 				$enable_sale = isset( $pricing_option['enable_sale'] ) && '1' == $pricing_option['enable_sale'] ? true : false;
@@ -548,28 +553,38 @@ class WP_Travel_Engine_Template_Hooks {
 									data-cost-field = 'pricing_options[<?php echo esc_attr( $key ); ?>][cost]'
 									data-type = '<?php echo esc_attr( $key ); ?>'
 									data-cost="<?php echo esc_attr( $price ); ?>"
-									data-pricing-type="<?php echo esc_attr( $pricing_type ); ?>"/>
+									data-pricing-type="<?php echo esc_attr( $pricing_type ); ?>"
+									id="pax_<?php echo esc_attr( $key ); ?>"
+									valor="<?php echo esc_attr( $price ); ?>"/> 
 								<button class="wpte-bf-plus">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M368 224H224V80c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v144H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h144v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V288h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path></svg>
 								</button>
 								<button class="wpte-bf-minus">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M368 224H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h352c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path></svg>
 								</button>
-							</div>
-							<span><?php echo esc_html( $pricing_label ); ?></span>
+							</div> 
 						</div> 
-						<div class="wpte-bf-price">
+						<input type="hidden" id="val_<?php echo esc_attr( $key ); ?>_ins" name="" value="<?php echo esc_attr( $price ); ?>" data-cost="<?php echo esc_attr( $price ); ?>" class="pax_<?=$i?>">
+						<div class="wpte-bf-price" id="pax_<?php echo esc_attr( $key ); ?>_ins">
 							<ins>
 								<?php echo wp_travel_engine_get_formated_price_with_currency_code_symbol( $price ); ?></b>
 							</ins>
-							<span class="wpte-bf-pqty"><?php echo apply_filters( 'wte_default_pricing_option_unit_' . $key, sprintf( __( 'Por %1$s', 'wp-travel-engine' ), $pricing_label ) ); ?></span>
+							<span class="wpte-bf-pqty" style="line-height: 14px"><?php echo apply_filters( 'wte_default_pricing_option_unit_' . $key, sprintf( __( 'Por %1$s', 'wp-travel-engine' ), $pricing_label ) ); ?>
+								
+								<?php if ($key === 'child') { ?>
+									<br>
+									(De <?=$min_age_child?> a <?=$max_age_child?> anos)
+								<?php } ?>
+								<?php if ($key === 'infant') { ?>
+									<br>
+									(De <?=$min_age_infant?> a <?=$max_age_infant?> anos)
+								<?php } ?>
+							</span> 
 						</div>
 					</div>
 				<?php
+				$i++;
 			endforeach;
-		else :
-			$this->booking_form_default_traveller_inputs( $default_price );
-		endif;
 
 	}
 

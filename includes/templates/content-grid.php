@@ -65,9 +65,9 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="category-trip-budget">
                 <span class="price-holder">
                     <?php if( $on_sale ) : ?>
-                    <span class="striked-price">R$ <?=$trip_price?></span>
+                    <span class="striked-price">U$ <?=$trip_price?></span>
                     <?php endif; ?>
-                    <span class="actual-price">R$ <?=$trip_price?></span>
+                    <span class="actual-price">U$ <?=$trip_price?></span>
                 </span>
             </div>
             <?php }else{ ?>

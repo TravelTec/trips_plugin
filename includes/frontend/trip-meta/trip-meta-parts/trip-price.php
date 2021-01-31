@@ -1,9 +1,42 @@
 <?php
 	$wrapper_classes = apply_filters( 'wpte_bf_outer_wrapper_classes', '' );
 		global $post;
-		$wp_travel_engine_setting = get_post_meta( $post->ID,'wp_travel_engine_setting',true );  
+		$wp_travel_engine_setting = get_post_meta( $post->ID,'wp_travel_engine_setting',true ); 
+
+		$contador = (count($wp_travel_engine_setting['multiple_pricing'])-1);
+
+		
+		for ($i=0; $i < count($wp_travel_engine_setting['multiple_pricing']); $i++) { 
+			$valores[] = array('adulto' => $wp_travel_engine_setting['multiple_pricing'][$i]['adult']['price'], 'crianca' => $wp_travel_engine_setting['multiple_pricing'][$i]['child']['price'], 'bebe' => $wp_travel_engine_setting['multiple_pricing'][$i]['infant']['price'], 'grupo' => $wp_travel_engine_setting['multiple_pricing'][$i]['group']['price'], 'inicio' => implode("-", array_reverse(explode("/", $wp_travel_engine_setting['multiple_pricing'][$i]['adult']['inicio']))), 'termino' => implode("-", array_reverse(explode("/", $wp_travel_engine_setting['multiple_pricing'][$i]['adult']['termino']))));
+		}
+		usort($valores, function($d1, $d2){
+		    $t1 = strtotime($d1['inicio']);
+		    $t2 = strtotime($d2['inicio']);
+		    if ($t1 === $t2) return 0;
+		    return ($t1 < $t2) ? -1 : 1;
+		}); 
+
+		for ($i=0; $i < count($valores); $i++) {   
+
+			$inicio = explode("/", implode("/", array_reverse(explode("-", $valores[$i]['inicio']))));
+			$termino = explode("/", implode("/", array_reverse(explode("-", $valores[$i]['termino']))));
+
+			$mes_inicio = ($inicio[1] == '01' ? 0 : preg_replace("@0+@","",($inicio[1]-1)));
+			$mes_final = ($termino[1] == '01' ? 0 : preg_replace("@0+@","",($termino[1]-1)));
+
+			$dia_inicio = ($inicio[0] < '10' ? preg_replace("@0+@","",($inicio[0])) : $inicio[0]);
+			$dia_final = ($termino[0] < '10' ? preg_replace("@0+@","",($termino[0])) : $termino[0]);
+
+
+			$datas .= '{ "start": "'.implode("/", array_reverse(explode("-", $valores[$i]['inicio']))).'", "end": "'.implode("/", array_reverse(explode("-", $valores[$i]['termino']))).'", "adulto": "'.$valores[$i]['adulto'].'", "crianca": "'.$valores[$i]['crianca'].'", "bebe": "'.$valores[$i]['bebe'].'", "grupo": "'.$valores[$i]['grupo'].'" }'.($i == $contador ? '' : ','); 
+			//$datas[] = array('start' => 'new Date('.$inicio[2].', '.$mes_inicio.', '.$dia_inicio.')', 'end' => 'new Date('.$termino[2].', '.$mes_final.', '.$dia_final.')');
+
+		}
+		//$valores_datas = str_replace("\"", "'", json_encode($datas)); 
+		$valores_datas = '['.$datas.']';
 ?>
 <div class="wpte-bf-outer <?php echo esc_attr( $wrapper_classes ); ?>">
+	<input type="hidden" id="datas" value='<?=$valores_datas?>' name=""> 
 	<!-- Prices List -->
 	<?php do_action( 'wte_before_price_info' ); ?>
 	<div class="wpte-bf-price-wrap">
@@ -11,26 +44,26 @@
 		<div class="wpte-bf-ptitle"><?php _e( 'Valores', 'wp-travel-engine' ); ?></div>
 		<?php do_action( 'wte_after_price_info_title' ); ?>
 
-		<div class="wpte-bf-price">
+		<div class="wpte-bf-price" id="price_per_person">
 		<?php if ( $is_sale_price_enabled ) : ?>
 			<del>
-				<?php echo $wp_travel_engine_setting['multiple_pricing']['adult']['currency_code_sale'].' '.$regular_price; ?>
+				<?php echo $wp_travel_engine_setting['multiple_pricing'][0]['adult']['currency_code'].' '.$regular_price; ?>
 			</del>
 		<?php endif; ?>
 			<ins>
-				<?php echo $wp_travel_engine_setting['multiple_pricing']['adult']['currency_code'].' '.$price; ?></b>
+				<?php echo $wp_travel_engine_setting['multiple_pricing'][0]['adult']['currency_code'].' '.$price; ?></b>
 			</ins>
 			<?php 
 				$per_person_txt_out = 'per-person' === $price_per_text ? __( 'Por pessoa', 'wp-travel-engine' ) : __( 'Por grupo', 'wp-travel-engine' );
 			?>
 			<span class="wpte-bf-pqty"><?php echo apply_filters( 'wte_default_traveller_unit', $per_person_txt_out ); ?></span>
-		</div>
-
-		<?php do_action( 'wte_after_price_info_list' ); ?>
+		</div> 
 	</div>
 	<?php do_action( 'wte_after_price_info' ); ?>
+	<?php session_start(); ?>
+	<?php $_SESSION['currency_code'] = $wp_travel_engine_setting['multiple_pricing'][0]['adult']['currency_code']; ?>
 	<!-- ./ Prices List -->
- 	<input type="hidden" id="currency_code" value="<?=$wp_travel_engine_setting['multiple_pricing']['adult']['currency_code'];?>" name="">
+ 	<input type="hidden" id="currency_code" value="<?=$wp_travel_engine_setting['multiple_pricing'][0]['adult']['currency_code'];?>" name="">
 	<!-- Booking Form -->
 	<?php do_action( 'wte_before_tip_booking_form' ); ?>
 	<form id="wpte-booking-form" method="POST" class="price-holder" autocomplete="off" action="<?php echo esc_url( get_permalink( $wte_placeholder ) ); ?>">
@@ -95,33 +128,12 @@
 						<span class="wpte-bf-total-txt"><?php _e( 'Total', 'wp-travel-engine' ); ?> :</span>
 						<span class="wpte-bf-currency">
 							<?php //echo wp_travel_engine_get_currency_code(); ?> 
-							<?php echo $wp_travel_engine_setting['multiple_pricing']['adult']['currency_code']; ?>
+							<?php echo $wp_travel_engine_setting['multiple_pricing'][0]['adult']['currency_code']; ?>
 						</span>
 						<span class="wpte-price">
 							<?php echo wp_travel_engine_get_formated_price_separator( $price ); ?>
 						</span>
-					</div>
-					<div class="wpte-bf-toggle-wrap wpte-bf-animate-toggle">
-						<button class="wpte-bf-toggle-title">
-							<span><?php _e( 'Ver Valores', 'wp-travel-engine' ); ?></span>
-						</button>
-						<div class="wpte-bf-toggle-content">
-							<table class="wpte-bf-travellers-price-table">
-								<caption><?php _e( 'Passageiros', 'wp-travel-engine' ); ?></caption>
-								<tbody>
-									<tr>
-										<td>1 <?php echo apply_filters( 'wte_default_traveller_type', __( 'Person', 'wp-travel-engine' ) ); ?> <span class="wpte-bf-info">(<?php echo wp_travel_engine_get_formated_price_with_currency_symbol( $price ); ?>/<?php echo apply_filters( 'wte_default_traveller_type', __( 'Person', 'wp-travel-engine' ) ); ?>)</span></td>
-										<td><?php echo wp_travel_engine_get_formated_price_with_currency_code_symbol( $price ); ?></td>
-									</tr>
-								</tbody>
-							</table>
-							<?php do_action( 'wte_before_trip_price_total' ); ?>
-							<div class="wpte-bf-total">
-								<?php _e( 'Total', 'wp-travel-engine' ); ?>: <b><?php echo $wp_travel_engine_setting['multiple_pricing']['adult']['currency_code'].' '.$price; ?></b>
-							</div>
-							<?php do_action( 'wte_after_trip_price_total' ); ?>
-						</div><!-- .wpte-bf-toggle-content -->
-					</div><!-- .wpte-bf-toggle-wrap -->
+					</div> 
 					<div class="wpte-bf-btn-wrap">
 						<input type="button" name=""
 							value="<?php _e( 'Continuar', 'wp-travel-engine' ); ?>" class="wpte-bf-btn" />

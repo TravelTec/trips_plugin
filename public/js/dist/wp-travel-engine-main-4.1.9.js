@@ -153,10 +153,13 @@ jQuery(document).ready(function ($) {
             var cartField = $(numberField).data("cartField");
             var type = $(numberField).data("type");
             var costField = $(numberField).data("costField");
-            var cost = $(numberField).data("cost").toString().split(',');
+            var cost = $(numberField).attr('valor').toString().split(','); 
             cost = parseFloat(cost[0].replace('.', ''));
+            console.log(cost);
+            var cost_value = $(numberField).attr('valor').toString().split(',');
+            cost_value = parseFloat(cost_value[0].replace('.', ''))*count;
             var formattedCost = wteGetFormatedPriceWithCurrencyCodeSymbol(
-                cost,
+                cost_value,
                 wte.currency.code,
                 wte.currency.symbol
             );
@@ -166,9 +169,7 @@ jQuery(document).ready(function ($) {
             window.wteCartFields[cartField] = count;
             window.wteCartFields[costField] = cost;
 
-            if (count == 0) {
-                count = 1;
-            }
+             
 
             // if (
             //     count > 1 &&
@@ -197,7 +198,7 @@ jQuery(document).ready(function ($) {
             }
 
             // Calculate new price from the cost.
-            var price = cost / count;
+            var price = cost;
             if (!isFinite(price)) {
                 price = $(numberField).data("cost");
                 if ("" == price) price = 0;
@@ -215,11 +216,14 @@ jQuery(document).ready(function ($) {
                 wte.currency.symbol
             );
             var formattedPrice = wteGetFormatedPrice(price);
-            var priceHtml = wte.currency.symbol+' '+formattedPrice;
-            jQuery(this)
-                .parents(".wpte-bf-traveler-block")
-                .find(".wpte-bf-price ins")
-                .html(priceHtml);
+            var priceHtml = wte.currency.symbol+' '+formattedPrice; 
+
+            var preco_adulto = $("#val_adult_ins").val();
+            var preco_crianca = $("#val_child_ins").val();
+            var preco_bebe = $("#val_infant_ins").val();
+            $("#pax_adult_ins ins").html($("#currency_code").val()+' '+preco_adulto);
+            $("#pax_child_ins ins").html($("#currency_code").val()+' '+preco_crianca);
+            $("#pax_infant_ins ins").html($("#currency_code").val()+' '+preco_bebe);
 
             if (0 == cost) {
                 return;
@@ -263,7 +267,8 @@ jQuery(document).ready(function ($) {
 
     function calculateSingleTravellerTypeCost(numberField) {
         var count = $(numberField).val();
-        var price = $(numberField).data("cost").split(',');
+        var price = $("#val_"+$(numberField).data("type")+"_ins").val().split(',');
+        console.log(price);
         price = price[0].replace(".", "");
 
         if (isNaN(price) || "" == price) {
@@ -345,17 +350,45 @@ jQuery(document).ready(function ($) {
         } else {
             return [false, "", "Unavailable"];
         }
-    }
+    } 
+    var dados = new Array();
+    var dados_date = new Array();
+    var ranges = jQuery.parseJSON($("#datas").val()); 
 
-    /**
-     * Change to the next tab afeter selecting the date.
-     */
+    for(var i=0; i<ranges.length; i++) {
+        start = (ranges[i].start).split("/");
+            end = (ranges[i].end).split("/");
+
+            year_start = start[2];
+            //($inicio[1] == '01' ? 0 : preg_replace("@0+@","",($inicio[1]-1)))
+            month_start = (start[1] == '01' ? 0 : (start[1]-1));
+            //($termino[1] == '01' ? 0 : preg_replace("@0+@","",($termino[1]-1)))
+            day_start = (start[0] < '10' ? start[0].substr(1) : start[0]);
+
+            year_end = end[2];
+            //($inicio[1] == '01' ? 0 : preg_replace("@0+@","",($inicio[1]-1)))
+            month_end = (end[1] == '01' ? 0 : (end[1]-1));
+            //($termino[1] == '01' ? 0 : preg_replace("@0+@","",($termino[1]-1)))
+            day_end = (end[0] < '10' ? end[0].substr(1) : end[0]);
+
+            dados[i] = new Array();
+            dados[i].push(new Date(year_start, month_start, day_start)); 
+            dados[i].push(new Date(year_end, month_end, day_end)); 
+
+            dados_date[i] = new Array();
+            dados_date[i].push(year_start+'-'+month_start+'-'+day_start); 
+            dados_date[i].push(year_end+'-'+month_end+'-'+day_end); 
+    } 
+               
     $(".wpte-bf-datepicker").datepicker({
-        minDate: 0,
-        beforeShowDay:
-            0 == availableDates.length || "" == window.wte_fix_date.enabled
-                ? ApplyCutOffDays
-                : checkAvailableDates,
+        beforeShowDay: function(date) {
+            for(var i=0; i<dados.length; i++) {
+              if(date >= dados[i][0] && date <= dados[i][1]) return [true, ''];
+            }
+            return [false, ''];
+        },
+        minDate: dados[0][0],
+        maxDate: dados[dados.length -1][1],
         dateFormat: "yy-mm-dd",
         onSelect: function (dateText, inst) {
             isDateSelected = true;
@@ -374,6 +407,51 @@ jQuery(document).ready(function ($) {
                 return;
             }
             window.wteCartFields["trip-date"] = dateText;
+
+            for(var i=0; i<ranges.length; i++) {
+                start = (ranges[i].start).split("/");
+                end = (ranges[i].end).split("/"); 
+
+                year_start = start[2];
+                //($inicio[1] == '01' ? 0 : preg_replace("@0+@","",($inicio[1]-1)))
+                month_start = start[1];
+                //($termino[1] == '01' ? 0 : preg_replace("@0+@","",($termino[1]-1)))
+                day_start = start[0];
+
+                year_end = end[2];
+                //($inicio[1] == '01' ? 0 : preg_replace("@0+@","",($inicio[1]-1)))
+                month_end = end[1];
+                //($termino[1] == '01' ? 0 : preg_replace("@0+@","",($termino[1]-1)))
+                day_end = end[0];
+
+                var data_inicio = day_start+'-'+month_start+'-'+year_start; 
+                var data_final = day_end+'-'+month_end+'-'+year_end;  
+
+                var data_inicial = data_inicio.replace("-", "/").replace("-", "/");  
+                var data_final = data_final.replace("-", "/").replace("-", "/");
+
+                var parte_data_inicial = data_inicial.split("/");
+                var data_inicial2 = new Date(parte_data_inicial[2], parte_data_inicial[1] - 1, parte_data_inicial[0]);
+
+                var parte_data_final = data_final.split("/");
+                var data_final2 = new Date(parte_data_final[2], parte_data_final[1] - 1, parte_data_final[0]);
+
+                var parte_data_comparativo = dateText.split("-");
+                var data_comparativo2 = new Date(parte_data_comparativo[0], parte_data_comparativo[1] - 1, parte_data_comparativo[2]);
+
+                if (data_comparativo2 >= data_inicial2 && data_comparativo2 <= data_final2) {
+                    $("#price_per_person ins").html($("#currency_code").val()+' '+ranges[i].adulto);
+                    $("#pax_adult").attr("valor", ranges[i].adulto); 
+                    $("#val_adult_ins").val(ranges[i].adulto); 
+                    $("#val_child_ins").val(ranges[i].crianca); 
+                    $("#val_infant_ins").val(ranges[i].bebe); 
+                    $("#pax_child").attr("valor", ranges[i].crianca); 
+                    $("#pax_infant").attr("valor", ranges[i].bebe); 
+                    $("#pax_adult_ins ins").html($("#currency_code").val()+' '+ranges[i].adulto); 
+                    $("#pax_child_ins ins").html($("#currency_code").val()+' '+ranges[i].crianca); 
+                    $("#pax_infant_ins ins").html($("#currency_code").val()+' '+ranges[i].bebe); 
+                }
+            }
 
             try {
                 if ("" == window.wte_fix_date.enabled) {
@@ -405,14 +483,23 @@ jQuery(document).ready(function ($) {
                                 "maxtravellers",
                                 seatsAvailable
                             );
-                            // $(numberField).data('cost', price);
-                            // var priceHtml = window.wte.currency.code + '<b> ' + wteGetFormatedPrice(price) + '</b>';
-                            // $(numberField).parents('.wpte-bf-traveler-block').find('.wpte-bf-price ins').html(priceHtml);
+                            $(numberField).data('cost', price);
+                            var priceHtml = window.wte.currency.code + '<b> ' + wteGetFormatedPrice(price) + '</b>';
+                            $(numberField).parents('.wpte-bf-traveler-block').find('.wpte-bf-price ins').html(priceHtml);
+                            $("#pax_adult").attr("valor", ranges[i].adulto); 
+                            $("#val_adult_ins").val(ranges[i].adulto); 
+                            $("#val_child_ins").val(ranges[i].crianca); 
+                            $("#val_infant_ins").val(ranges[i].bebe); 
+                            $("#pax_child").attr("valor", ranges[i].crianca); 
+                            $("#pax_infant").attr("valor", ranges[i].bebe); 
+                            $("#pax_adult_ins ins").html($("#currency_code").val()+' '+ranges[i].adulto); 
+                            $("#pax_child_ins ins").html($("#currency_code").val()+' '+ranges[i].crianca); 
+                            $("#pax_infant_ins ins").html($("#currency_code").val()+' '+ranges[i].bebe); 
                         });
                     }
                 }
             } catch (err) { }
-            populateHTML();
+            //populateHTML();
         },
     });
 
@@ -813,111 +900,111 @@ jQuery(document).ready(function($){
     });
 jQuery(document).ready(function($){
    $('.wp-travel-engine-datetime').datepicker({ maxDate: 0, changeMonth: true,
-		changeYear: true, dateFormat: 'yy-mm-dd', yearRange: "-100:+0" });
+        changeYear: true, dateFormat: 'yy-mm-dd', yearRange: "-100:+0" });
 
  //   $(".wp-travel-engine-price-datetime").datepicker({
  //        dateFormat: "yy-mm-dd",
  //        minDate: 0,
  //        changeMonth: true,
-	// 	changeYear: false,
+    //  changeYear: false,
  //        onSelect: function(){
  //            $(".check-availability").hide();
  //            $(".book-submit").fadeIn("slow");
  //        }
-	// });
+    // });
    
 });
 (function (window, document, $, undefined) {
-	jQuery(document).ready(function($){
-		
-		$("body").on("click", ".btn-loadmore", function (e) {
-			e.preventDefault();
+    jQuery(document).ready(function($){
+        
+        $("body").on("click", ".btn-loadmore", function (e) {
+            e.preventDefault();
 
-			var button = $(this),
-				current_page = button.attr('data-current-page'),
-				max_page     = button.attr('data-max-page'),
-				// mode         = $(".wte-view-mode-selection.active").attr('data-mode'),
-				data         = {
-					'action': 'wpte_ajax_load_more',
-					'query' : button.attr('data-query-vars'),
-					'page'  : current_page,
-					'nonce' : beloadmore.nonce,
-					// 'mode'  : mode
-				};
+            var button = $(this),
+                current_page = button.attr('data-current-page'),
+                max_page     = button.attr('data-max-page'),
+                // mode         = $(".wte-view-mode-selection.active").attr('data-mode'),
+                data         = {
+                    'action': 'wpte_ajax_load_more',
+                    'query' : button.attr('data-query-vars'),
+                    'page'  : current_page,
+                    'nonce' : beloadmore.nonce,
+                    // 'mode'  : mode
+                };
 
-			$.ajax({ // you can also use $.post here
-				url: beloadmore.url, // AJAX handler
-				data: data,
-				type: 'POST',
-				beforeSend: function (xhr) {
-					$("#loader").fadeIn(500); // change the button text, you can also add a preloader image
-				},
-				success: function (response) {
-					button.before(response);
-					current_page++;
-					button.attr('data-current-page', current_page);
-					if (current_page == max_page)
-						button.remove();
-				},
-				complete: function () {               
-					$("#loader").fadeOut(500);
-					wte_rating_star_initializer_for_templates();
-				}
-			});
-			
-		});
-		
-		$("body").on("click", ".load-destination", function (e) {
-			e.preventDefault();
+            $.ajax({ // you can also use $.post here
+                url: beloadmore.url, // AJAX handler
+                data: data,
+                type: 'POST',
+                beforeSend: function (xhr) {
+                    $("#loader").fadeIn(500); // change the button text, you can also add a preloader image
+                },
+                success: function (response) {
+                    button.before(response);
+                    current_page++;
+                    button.attr('data-current-page', current_page);
+                    if (current_page == max_page)
+                        button.remove();
+                },
+                complete: function () {               
+                    $("#loader").fadeOut(500);
+                    wte_rating_star_initializer_for_templates();
+                }
+            });
+            
+        });
+        
+        $("body").on("click", ".load-destination", function (e) {
+            e.preventDefault();
 
-			var button = $(this),
-				current_page = button.attr('data-current-page'),
-				max_page     = button.attr('data-max-page'),
-				// mode         = $(".wte-view-mode-selection.active").attr('data-mode'),
-				data         = {
-					'action': 'wpte_ajax_load_more_destination',
-					'query' : button.attr('data-query-vars'),
-					'page'  : current_page,
-					'nonce' : beloadmore.nonce,
-					// 'mode'  : mode
-				};
+            var button = $(this),
+                current_page = button.attr('data-current-page'),
+                max_page     = button.attr('data-max-page'),
+                // mode         = $(".wte-view-mode-selection.active").attr('data-mode'),
+                data         = {
+                    'action': 'wpte_ajax_load_more_destination',
+                    'query' : button.attr('data-query-vars'),
+                    'page'  : current_page,
+                    'nonce' : beloadmore.nonce,
+                    // 'mode'  : mode
+                };
 
-			$.ajax({ // you can also use $.post here
-				url: beloadmore.url, // AJAX handler
-				data: data,
-				type: 'POST',
-				beforeSend: function (xhr) {
-					$("#loader").fadeIn(500); // change the button text, you can also add a preloader image
-				},
-				success: function (response) {
-					button.before(response);
-					current_page++;
-					button.attr('data-current-page', current_page);
-					if (current_page == max_page)
-						button.remove();
-				},
-				complete: function () {               
-					$("#loader").fadeOut(500);
-					wte_rating_star_initializer_for_templates();
-				}
-			});
-			
-		});
-	});
+            $.ajax({ // you can also use $.post here
+                url: beloadmore.url, // AJAX handler
+                data: data,
+                type: 'POST',
+                beforeSend: function (xhr) {
+                    $("#loader").fadeIn(500); // change the button text, you can also add a preloader image
+                },
+                success: function (response) {
+                    button.before(response);
+                    current_page++;
+                    button.attr('data-current-page', current_page);
+                    if (current_page == max_page)
+                        button.remove();
+                },
+                complete: function () {               
+                    $("#loader").fadeOut(500);
+                    wte_rating_star_initializer_for_templates();
+                }
+            });
+            
+        });
+    });
 
-	function wte_rating_star_initializer_for_templates() {
-		if ($(document).find('.trip-review-stars').length) {
-			$(document).find('.trip-review-stars').each(function () {
-				var rating_value = $(this).data('rating-value');
-				starSvgIcon = $(this).data('icon-type');
-				var starSvgIcon = (starSvgIcon !== '') ? starSvgIcon : '';
-				$(this).rateYo({
-					rating: rating_value,
-					starSvg: starSvgIcon,
-				});
-			});
-		}
-	}
+    function wte_rating_star_initializer_for_templates() {
+        if ($(document).find('.trip-review-stars').length) {
+            $(document).find('.trip-review-stars').each(function () {
+                var rating_value = $(this).data('rating-value');
+                starSvgIcon = $(this).data('icon-type');
+                var starSvgIcon = (starSvgIcon !== '') ? starSvgIcon : '';
+                $(this).rateYo({
+                    rating: rating_value,
+                    starSvg: starSvgIcon,
+                });
+            });
+        }
+    }
 
 })(window, document, jQuery);
 jQuery(document).ready(function($){
@@ -1475,4 +1562,4 @@ jQuery(document).ready(function($){
         rtl     : rtlenable,
         dots    : false
     });
-});
+}); 

@@ -1,5 +1,5 @@
-<?php
-/**
- * Email Settings Tabs Development.
- */
-?>
+<?php
+/**
+ * Email Settings Tabs Development.
+ */
+?>
