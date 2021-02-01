@@ -10,7 +10,7 @@ Requires at least: 4.7
 
 Tested up to: 5.5
 
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 
 Requires PHP: 5.4
 
@@ -33,6 +33,11 @@ WP Viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus r
 
 
 == Changelog ==
+
+
+= 1.5.0 =
+
+* Inserção de funcionalidade para cadastro de roteiros "Tailor Made". Uma vez cadastrado, o cliente recebe uma proposta individual e o roteiro não pode ser visualizado no site por ser específico para o cliente que recebeu o link via e-mail.
 
 
 = 1.4.0 =

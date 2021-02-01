@@ -48,6 +48,8 @@
 
                                             <ul class="wpte-list">
 
+                                                <?php if (!empty($personal_options['travelers'])) { ?>
+
                                                 <?php foreach( $personal_options['travelers'] as $key => $value ) :
 
                                                     if ( ! isset( $value[$i] ) ) :
@@ -99,6 +101,8 @@
                                                     endif;
 
                                                 endforeach; ?>
+
+                                            <?php } ?>
 
                                             </ul>
 

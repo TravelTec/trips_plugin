@@ -112,6 +112,14 @@ function wpte_core_ui_fxn($) {
     // Save and continue link action.
     $(document).on("click", ".wpte_save_continue_link", function (e) {
         e.preventDefault();
+        if ($(this).data("tab") == 'pricing' && $("#trip_type").val() == 1) {
+            var token_cliente = $("#token_cliente").val();
+            var email_cliente = $("#e_mail_cliente").val();
+            var nome_cliente = $("#nome_cliente").val();
+            var trip_id = $(this).data("post-id");
+
+            criar_reserva_tailor_made(token_cliente, email_cliente, nome_cliente, trip_id);
+        }
         // Get Data.
         var parent = ".wpte-tab-content.content_loaded";
 
@@ -1676,4 +1684,30 @@ function decodeEntities(encodedString) {
     var newencodedString = encodedString.replace(/&amp;/g, "&");
     textArea.innerHTML = newencodedString;
     return textArea.value;
+}
+
+function exibe_dados_cliente(){
+    jQuery("#dados_conta").toggle(500);
+}
+function esconder_dados_cliente(){
+    jQuery("#dados_conta").attr('style', 'border: 1px solid #ddd;padding: 28px;margin-top: 15px;display: none');
+}
+function criar_reserva_tailor_made(token_cliente, email_cliente, nome_cliente, trip_id){
+    var form_data = {};
+
+    form_data["token_cliente"] = token_cliente;
+    form_data["email_cliente"] = email_cliente;
+    form_data["nome_cliente"] = nome_cliente;
+    form_data["trip_id"] = trip_id;
+    form_data["action"] = "wpte_global_tabs_save_tailor";
+
+    jQuery.ajax({
+        url: ajaxurl,
+        data: form_data,
+        type: "post",
+        dataType: "json", 
+        success: function (data) {
+            console.log(data);
+        },
+    });
 }

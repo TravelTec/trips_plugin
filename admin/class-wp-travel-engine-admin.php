@@ -3962,9 +3962,7 @@ class Wp_Travel_Engine_Admin
 
 			$wp_travel_engine_setting_saved = $obj->recursive_html_entity_decode($wp_travel_engine_setting_saved);
 
-			$meta_to_save = isset( $_POST['wp_travel_engine_setting'] ) ? $_POST['wp_travel_engine_setting'] : array();
-
-
+			$meta_to_save = isset( $_POST['wp_travel_engine_setting'] ) ? $_POST['wp_travel_engine_setting'] : array(); 
 
 
 
@@ -4090,6 +4088,102 @@ class Wp_Travel_Engine_Admin
 
 				update_post_meta($post_id,'wp_travel_engine_setting_trip_price',$cost);
 
+			} 
+
+			$data_viagem = implode("-", array_reverse(explode("/", $meta_to_save["multiple_pricing"][0]["adult"]["inicio"])));
+
+			if ($meta_to_save['trip_type'] == 1 && $_POST['tab'] == 'pricing') {
+				$trip_type = $meta_to_save['trip_type'];
+				$nome_cliente = $meta_to_save['nome_cliente'];
+				$token_cliente = $meta_to_save['token_cliente'];
+				$e_mail_cliente = $meta_to_save['e_mail_cliente'];
+
+				$post = get_post( $post_id );
+
+				$slug = $post->post_title;
+
+				$new_post = array(
+
+					'post_status' => 'publish',
+
+					'post_type'   => 'booking',
+
+					'post_title'  => 'booking',
+
+				); 
+
+				
+				$cost = str_replace(",00", "", $settings['trip_prev_price']);  
+
+
+
+				$booking_id = wp_insert_post( $new_post );
+
+				$book_post = array(
+
+					'ID'         => $booking_id,
+
+					'post_title' => 'Proposta nº ' . $booking_id,
+
+				);
+
+				$dados_nome = explode(" ", $nome_cliente);
+
+				$order_metas = array(
+
+					'place_order' => array(
+
+						'traveler' => 1,
+
+						'cost'     => 0.00, 
+
+						'due'     => esc_attr( $cost ), 
+
+						'tid'      => esc_attr( $post_id ),
+
+						'tname'    => esc_attr( $slug ), 
+
+						'datetime' => $data_viagem,
+
+						'booking'  => array(
+
+							'fullname' => $nome_cliente,
+
+							'fname'   => $dados_nome[0],
+
+							'lname'   => $dados_nome[1],
+
+							'phone'   => '',
+
+							'email'   => $e_mail_cliente,
+
+							'address' => '',
+
+							'city'    => '',
+
+							'country' => '',
+
+							'survey'  => '',
+
+						),
+
+					),
+
+				);
+
+
+
+				// Update the post into the database
+
+				$updated     = wp_update_post( $book_post );
+
+				$bid[]       = $booking_id;
+
+				update_post_meta( $booking_id, 'wp_travel_engine_booking_payment_status', 'pending' );
+
+				update_post_meta( $booking_id, 'wp_travel_engine_booking_status', 'tailor' );
+
+				update_post_meta( $booking_id, 'wp_travel_engine_booking_setting', $order_metas );
 			}
 
 
@@ -4358,6 +4452,18 @@ class Wp_Travel_Engine_Admin
 
 	}
 
+	//wpte_global_tabs_save_tailor_callback
+
+
+	function wpte_global_tabs_save_tailor_callback() {
+
+
+
+		print_r($_POST);
+
+
+
+	}
 
 
 	/**

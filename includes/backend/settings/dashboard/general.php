@@ -207,7 +207,7 @@ $payment_debug = isset( $wp_travel_engine_settings['payment_debug'] ) ? $wp_trav
           }
         }
 
-        $.ajax(settings).done(function (response) {
+        jQuery.ajax(settings).done(function (response) {
             if (response.errors) {
 
                 return Swal.fire({

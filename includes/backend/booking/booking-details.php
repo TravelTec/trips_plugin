@@ -18,6 +18,8 @@ global $post;
 
 $booking_metas               = get_post_meta($post->ID, 'wp_travel_engine_booking_setting', true); 
 
+$config               = get_post_meta($post->ID, 'wp_travel_engine_setting', true);
+
 $pno                         = isset($booking_metas['place_order']['traveler']) ? $booking_metas['place_order']['traveler'] : 0;
 
 $billing_options             = isset($booking_metas['place_order']) ? $booking_metas['place_order'] : array();

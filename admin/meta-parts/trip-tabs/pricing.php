@@ -17,6 +17,11 @@ if ( ! is_object( $post ) && defined( 'DOING_AJAX' ) && DOING_AJAX ) {
  */
 $wte_trip_settings = get_post_meta( $post_id, 'wp_travel_engine_setting', true );   
 
+$trip_type   = isset( $wte_trip_settings['trip_type'] ) ? $wte_trip_settings['trip_type'] : false;
+$nome_cliente   = isset( $wte_trip_settings['nome_cliente'] ) ? $wte_trip_settings['nome_cliente'] : false;
+$e_mail_cliente   = isset( $wte_trip_settings['e_mail_cliente'] ) ? $wte_trip_settings['e_mail_cliente'] : false;
+$token_cliente   = isset( $wte_trip_settings['token_cliente'] ) ? $wte_trip_settings['token_cliente'] : false;
+
 
 if (!empty($wte_trip_settings['multiple_pricing'][0]['adult']['inicio'])) {  
     $timeZone = new DateTimeZone('UTC'); 
@@ -34,10 +39,7 @@ if (!empty($wte_trip_settings['multiple_pricing'][0]['adult']['inicio'])) {
  
     echo "<input type=\"hidden\" id=\"periodos\" value='".$data_periodo."'>"; 
 } 
-
-
-
-
+ 
 // default options.
 $default_pricing_options = 
     array( 
@@ -48,6 +50,10 @@ $default_pricing_options =
     ) ;
     $saved_pricing_options = $default_pricing_options;
     ?>
+    <input type="hidden" id="nome_cliente" name="" value="<?=$nome_cliente?>">
+    <input type="hidden" id="trip_type" name="" value="<?=$trip_type?>">
+    <input type="hidden" id="e_mail_cliente" name="" value="<?=$e_mail_cliente?>">
+    <input type="hidden" id="token_cliente" name="" value="<?=$token_cliente?>">
     <style type="text/css">
         
 
@@ -544,11 +550,11 @@ $default_pricing_options =
                                 <div class="wpte-field wpte-minmax wpte-floated">
                                     <div class="wpte-min">
                                         <label class="wpte-field-label">Idade mínima</label>
-                                        <input type="number" step="1" min="0" name="wp_travel_engine_setting[multiple_pricing][<?=$i?>][<?php echo esc_attr( $option ); ?>][min_age]" value="" placeholder="Informe o valor" data-parsley-id="17" class="parsley-success">
+                                        <input type="number" step="1" min="0" name="wp_travel_engine_setting[multiple_pricing][{{(data.key-1)}}][<?php echo esc_attr( $option ); ?>][min_age]" value="" placeholder="Informe o valor" data-parsley-id="17" class="parsley-success">
                                     </div>
                                     <div class="wpte-max">
                                         <label class="wpte-field-label">Idade máxima</label>
-                                        <input type="number" step="1" min="1" name="wp_travel_engine_setting[multiple_pricing][<?=$i?>][<?php echo esc_attr( $option ); ?>][max_age]" value="" placeholder="Informe o valor" data-parsley-id="19" class="parsley-success">
+                                        <input type="number" step="1" min="1" name="wp_travel_engine_setting[multiple_pricing][{{(data.key-1)}}][<?php echo esc_attr( $option ); ?>][max_age]" value="" placeholder="Informe o valor" data-parsley-id="19" class="parsley-success">
                                     </div>
                                 </div>
                             </div>

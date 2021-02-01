@@ -3464,7 +3464,7 @@ function wp_travel_engine_get_booking_status() {
 
 			'color' => '#FF9800',
 
-			'text'  => __( 'Pending', 'wp-travel-engine' ),
+			'text'  => __( 'Pendente', 'wp-travel-engine' ),
 
 		),
 
@@ -3472,7 +3472,7 @@ function wp_travel_engine_get_booking_status() {
 
 			'color' => '#008600',
 
-			'text'  => __( 'Booked', 'wp-travel-engine' ),
+			'text'  => __( 'Reservada', 'wp-travel-engine' ),
 
 		),
 
@@ -3480,7 +3480,7 @@ function wp_travel_engine_get_booking_status() {
 
 			'color' => '#FE450E',
 
-			'text'  => __( 'Refunded', 'wp-travel-engine' ),
+			'text'  => __( 'Recusada', 'wp-travel-engine' ),
 
 		),
 
@@ -3488,7 +3488,15 @@ function wp_travel_engine_get_booking_status() {
 
 			'color' => '#FE450E',
 
-			'text'  => __( 'Canceled', 'wp-travel-engine' ),
+			'text'  => __( 'Cancelada', 'wp-travel-engine' ),
+
+		),
+
+		'tailor' => array(
+
+			'color' => '#0066ff',
+
+			'text'  => __( 'Tailor made', 'wp-travel-engine' ),
 
 		),
 
