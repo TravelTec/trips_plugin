@@ -10,7 +10,7 @@ GitHub Plugin URI: https://github.com/TravelTec/trips_plugin
 
 Description: WP Viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus roteiros, compartilhar promoções, gerenciar suas reservas e manter contato com os clientes que desejam saber mais sobre seus pacotes. Tudo de forma rápida e intuitiva. 
 
-Version: 1.3.1
+Version: 1.4.0
 
 Author: Travel Tec
 

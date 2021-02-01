@@ -210,25 +210,25 @@ class Wp_Travel_Engine_Settings {
 
 			 ),
 
-			// 'wpte-dashboard'     => array(
+			'wpte-dashboard'     => array(
 
-			// 	'label'    => __( 'Dashboard', 'wp-travel-engine' ),
+				'label'    => __( 'Marketing', 'wp-travel-engine' ),
 
-			// 	'sub_tabs' => array(
+				'sub_tabs' => array(
 
-			// 		'user-dashboard' => array(
+			  		'user-dashboard' => array(
 
-			// 			'label'        => __( 'User Dashboard Settings', 'wp-travel-engine' ),
+			  			'label'        => __( 'Configuração geral', 'wp-travel-engine' ),
 
-			// 			'content_path' => plugin_dir_path( __FILE__ ) . 'backend/settings/dashboard/general.php',
+			 			'content_path' => plugin_dir_path( __FILE__ ) . 'backend/settings/dashboard/general.php',
 
-			// 			'current'      => true,
+			 			'current'      => true,
 
-			// 		),
+			  		),
 
-			// 	),
+			  	),
 
-			// ),
+			  ),
 
 			// 'wpte-extensions'    => array(
 

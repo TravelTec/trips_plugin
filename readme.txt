@@ -10,7 +10,7 @@ Requires at least: 4.7
 
 Tested up to: 5.5
 
-Stable tag: 1.3.1
+Stable tag: 1.4.0
 
 Requires PHP: 5.4
 
@@ -33,6 +33,11 @@ WP Viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus r
 
 
 == Changelog ==
+
+
+= 1.4.0 =
+
+* Inserção de funcionalidade para exportação de roteiros no sistema de e-mail marketing. Fornecedor atual utilizado para integração: Locaweb.
 
 
 = 1.3.0 =
