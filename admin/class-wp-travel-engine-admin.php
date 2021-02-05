@@ -2370,15 +2370,9 @@ class Wp_Travel_Engine_Admin
 
 	function wpte_filter_admin_page_templates($templates)
 
-	{
+	{ 
 
-		$templates['templates/template-destination.php'] = __('Destination Template', 'wp-travel-engine');
-
-		$templates['templates/template-activities.php'] = __('Activities Template', 'wp-travel-engine');
-
-		$templates['templates/template-trip_types.php'] = __('Trip Types Template', 'wp-travel-engine');
-
-		$templates['templates/template-trip-listing.php'] = __('Trip Listing Template', 'wp-travel-engine');
+		$templates['templates/template-activities.php'] = __('Destaques largura total', 'wp-travel-engine'); 
 
 		return $templates;
 

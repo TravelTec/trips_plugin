@@ -278,23 +278,7 @@ class Wp_Travel_Engine_Activator {
 
 
 
-		$template_pages = array(
-
-			'trip_types'	=> array(
-
-				'title' 	=> 'Trip Types',
-
-				'template' 	=> 'templates/template-trip_types.php'
-
-				),
-
-			'destination' 	=> array(
-
-				'title' 	=> 'Destination',
-
-				'template' 	=> 'templates/template-destination.php'
-
-				),
+		$template_pages = array( 
 
 			'activities'	=> array(
 

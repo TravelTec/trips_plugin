@@ -218,7 +218,9 @@ if ($trip_type == 1) {
 
       crossorigin="anonymous"></script>
 
-    <script src="https://wp02.montenegroev.com.br/wp-content/plugins/wp-travel-engine/admin/js/jquery.mask.js"></script>
+    <script src="/wp-content/themes/templatewp/js/jquery.mask.js"></script>
+     
+
 
     <script type="text/javascript">
 

@@ -68,7 +68,7 @@ $payment_debug = isset( $wp_travel_engine_settings['payment_debug'] ) ? $wp_trav
                         "cache-control: no-cache",
                         "content-type: application/json",
                         "postman-token: 82934c35-3bd1-7c2d-4c2e-53571acfe5fc",
-                        "url: wp01.montenegroev.com.br"
+                        "url: ".$_SERVER['HTTP_HOST']
                       ),
                     ));
 

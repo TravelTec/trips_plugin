@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="https://reservas.sidon.com.br/assets/css/cores.php">
+
 <link rel="stylesheet" href="https://reservas.sidon.com.br/assets/css/sweetalert.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css">
 
@@ -26,38 +26,8 @@ $cart_items   = $wte_cart->getItems();
                     $qtd_pax = $adults+$child+$infant;
                 }
         }
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.traveltec.com.br/serv/pagamento/listar_dados",
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_HTTPHEADER => array(
-            "cache-control: no-cache",
-            "content-type: application/json",
-            "postman-token: 82934c35-3bd1-7c2d-4c2e-53571acfe5fc",
-            "url: wp01.montenegroev.com.br"
-          ),
-        ));
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if ($err) {
-          echo "cURL Error #:" . $err;
-        } else {
-            $dados = json_decode($response, true);
-            $message = $dados['message']; 
-            $status_pagamento = $message['status'];
-        } 
-        echo '<input type="hidden" id="status_pagamento" value="'.str_replace("/", "", $message['status']).'">';
+ 
+            $status_pagamento = 0;
 
 ?>
 <style type="text/css">
@@ -80,53 +50,7 @@ $cart_items   = $wte_cart->getItems();
                  * Action hook for header steps.
                  */
                 do_action( 'wp_travel_engine_checkout_header_steps' );
-            }
-
-            $options                           = get_option('wp_travel_engine_settings', true);
-            $wp_travel_engine_terms_conditions = isset( $options['pages']['wp_travel_engine_terms_and_conditions'] ) ? esc_attr( $options['pages']['wp_travel_engine_terms_and_conditions'] ) : '';
-
-            if( function_exists( 'get_privacy_policy_url' ) && get_privacy_policy_url() ) {
-
-                $privacy_policy_lbl = sprintf( __( 'Check the box to confirm you\'ve read and agree to our <a href="%1$s" id="terms-and-conditions" target="_blank"> Terms and Conditions</a> and <a href="%2$s" id="privacy-policy" target="_blank">Privacy Policy</a>.', 'wp-travel-engine'), esc_url( get_permalink( $wp_travel_engine_terms_conditions ) ), esc_url( get_privacy_policy_url()) );
-
-                $checkout_default_fields['privacy_policy_info'] =  array(
-                    'type'          => 'checkbox',
-                    'options'       => array( '0' => $privacy_policy_lbl ),
-                    'name'          => 'wp_travel_engine_booking_setting[terms_conditions]',
-                    'wrapper_class' => 'wp-travel-engine-terms',
-                    'id'            => 'wp_travel_engine_booking_setting[terms_conditions]',
-                    'default'       => '',
-                    'validations'   => array(
-                        'required' => true,
-                    ),
-                    'option_attributes' => array(
-                        'required' => true,
-                        'data-msg' => __( 'Please make sure to check the privacy policy checkbox', 'wp-travel-engine' ),
-                        'data-parsley-required-message' => __( 'Please make sure to check the privacy policy checkbox', 'wp-travel-engine' ),
-                    ),
-                    'priority' => 70,
-                );
-
-            }
-            elseif ( current_user_can( 'edit_theme_options' ) ) {
-
-                $privacy_policy_lbl = sprintf( __( '%1$sPrivacy Policy page not set or not published, please check Admin Dashboard > Settings > Privacy.%2$s', 'wp-travel-engine' ), '<p style="color:red;">', '</p>' );
-
-                $checkout_default_fields['privacy_policy_info'] =  array(
-                    'type'              => 'text_info',
-                    // 'label'             => __( 'Privacy Policy', 'wp-travel-engine' ),
-                    'id'                => 'wp-travel-engine-privacy-info',
-                    'default'           => '',
-                    'priority'          => 80,
-                );
-
-            }
-
-            $checkout_fields   = WTE_Default_Form_Fields::booking();
-            $checkout_fields   = apply_filters( 'wp_travel_engine_booking_fields_display', $checkout_fields );
-
-            // $priority = array_column( $checkout_fields, 'priority' );
-            // array_multisort( $priority, SORT_ASC, $checkout_fields );
+            } 
 
         ?>
         <div class="wpte-bf-step-content-wrap">
@@ -137,9 +61,8 @@ $cart_items   = $wte_cart->getItems();
                     wte_get_template( 'checkout/mini-cart.php' );
                     do_action( 'wte_booking_after_minicart' );
                 ?>
-            </div><!-- .wpte-bf-book-summary -->
-            <?php  if ( ! empty( $checkout_fields ) && is_array( $checkout_fields ) ) : ?>
-                <div class="wpte-bf-checkout-form" style="width: 70%;padding-right: 30px;padding-left: 30px;background-color: #fff;border-radius: 5px;padding-top: 25px;margin-left: 31px;">
+            </div><!-- .wpte-bf-book-summary --> 
+                <div class="wpte-bf-checkout-form" style="width: 67%;padding-right: 30px;padding-left: 30px;background-color: #fff;border-radius: 5px;padding-top: 25px;margin-left: 31px;">
                     <?php do_action('wp_travel_engine_before_billing_form'); ?> 
                     <form id="wp-travel-engine-new-checkout-form" method="POST" name="wp_travel_engine_new_checkout_form" action="" enctype="multipart/form-data" class="" novalidate="">
                         <input type="hidden" name="action" value="wp_travel_engine_new_booking_process_action">
@@ -250,42 +173,7 @@ $cart_items   = $wte_cart->getItems();
 
 
 
-            $hide_traveller_info = isset( $options['travelers_information'] ) ? $options['travelers_information'] : 'yes';
-
-
-
-            if( 'yes' === $hide_traveller_info || '1' === $hide_traveller_info ) {
-
-                if ( isset( $_POST ) ) {
-
-                    $error_found = FALSE;
-
-
-
-                    //  Some input field checking
-
-                    if ( $error_found == FALSE ) {
-
-                        //  Use the wp redirect function
-
-                        wp_redirect( $wp_travel_engine_thankyou );
-
-                    }
-
-                    else {
-
-                        //  Some errors were found, so let's output the header since we are staying on this page
-
-                        if (isset($_GET['noheader']))
-
-                            require_once(ABSPATH . 'wp-admin/admin-header.php');
-
-                    }
-
-                }
-
-            }
-
+            $hide_traveller_info = isset( $options['travelers_information'] ) ? $options['travelers_information'] : 'yes'; 
 
 
             include_once WP_TRAVEL_ENGINE_ABSPATH . '/includes/lib/wte-form-framework/class-wte-form.php';
@@ -416,139 +304,7 @@ $cart_items   = $wte_cart->getItems();
             <input type="hidden" name="nonce" value="<?php echo $nonce;?>"> 
         </section> 
 
-                    <?php } ?>
-
-                       <!--  <br>
-
-                        <h4 style="    font-size: 24px;font-weight: 600;"><i class="fa fa-lock"></i> Dados para o pagamento</h4>
-                        <br>
-                        <div class="reservar" style="background-color: #eee;padding: 30px;">
-                        <div class="dados-fieldset-container"> 
-                            <div class="container-card">
-                                <div class="container-front">
-                                    <div class="row white-text" style="padding: 10px 17px">
-                                        <div class="input-field col-lg-12">
-                                            <label class="label" for="numero_do_cartao" style="font-size: 13px;font-weight: 400;padding-left: 0;">Numero do cartão:</label>
-                                            <div class="card-content">
-                                                <span class="input-group-addon" style="background-color: transparent;border: 1px solid transparent;">
-                                                    <i class="fa fa-credit-card" style="    font-size: 28px;color: #fff;margin: -2px 0px 2px 8px;"></i>
-                                                    <img id="iconeMaster" class="ocultarDisplay iconeCards" src="https://reservas.sidon.com.br/assets/images/icon-mastercard.png" style="max-width: 44px;margin-top: -3px;margin-bottom: 8px;margin-right: -12px;">
-                                                    <img id="iconeVisa" class="ocultarDisplay iconeCards" src="https://reservas.sidon.com.br/assets/images/icon-visa.png" style="max-width: 44px;margin-top: -3px;margin-bottom: 8px;margin-right: -12px;">
-                                                    <img id="iconeAmex" class="ocultarDisplay iconeCards" src="https://reservas.sidon.com.br/assets/images/icon-amex.png" style="max-width: 44px;margin-top: -3px;margin-bottom: 8px;margin-right: -12px;">
-                                                </span>
-                                                <input autocomplete="off" type="text" name="numero_do_cartao" value="" id="numero_do_cartao" placeholder="Digite o número do cartão" class="cardNumber validate form-control" required="" style="background-color: #fff;height: 35px;font-size: 13px" onfocusout="bandeiraCartao()">
-                                                <input type="hidden" id="quant01" value="">
-                                                <input type="hidden" id="bandeira_cartao" name="bandeira_cartao" value="">
-                                                <input type="hidden" id="bandeiras_permitidas" name="bandeiras_permitidas" value="mastercard;visa;amex;">
-                                            </div>
-                                        </div>
-                                        <div class="input-field col-lg-6">
-
-                                            <label class="label active" for="validade" style="font-size: 13px;font-weight: 400;padding-left: 0;">Validade (mês/ano):</label>
-                                            <input autocomplete="off" type="text" name="validade" placeholder="mm/aa" id="validadeCartao" required="" style="background-color: #fff;height: 35px;font-size: 13px" class="form-control" onfocusout="ValidarDadoValidadeCartao()">
-                                        </div> 
-
-                                        <div class="input-field col-lg-6">
-                                            <label class="label active" for="cpf" style="font-size: 13px;font-weight: 400;padding-left: 0;">CPF:</label>
-                                            <input autocomplete="off" type="text" name="cpf" id="cpf_cnpj_cartao" onclick="$('#cpf_cnpj_cartao').val('')" placeholder="000.000.000-00" required="" style="background-color: #fff;height: 35px;font-size: 13px" class="form-control">
-                                        </div>
-                                        <div class="input-field col-lg-6">
-                                            <label class="label active" for="nome" style="font-size: 13px;font-weight: 400;padding-left: 0;">Nome:</label>
-                                            <input autocomplete="off" type="text" name="nome" id="nome" placeholder="Digite o nome que está no cartão" required="" style="background-color: #fff;height: 35px;font-size: 13px" class="form-control">
-                                        </div>
-
-                                        <div class="input-field col-lg-6">
-                                            <label class="label active" for="sobrenome" style="font-size: 13px;font-weight: 400;padding-left: 0;">Sobrenome:</label>
-                                            <input autocomplete="off" type="text" name="sobrenome" id="sobrenome" placeholder="Digite o sobrenome que está no cartão" required="" style="background-color: #fff;height: 35px;font-size: 13px" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="container-back hide-on-med-and-down">
-                                    <div class="divider-card"></div>
-                                    <div class="input-content">
-                                        <div class="col-lg-2" style="padding: 0"></div>
-                                        <div class="input-field col-lg-10" style="padding-left: 0">
-                                            <label class="label active" for="numero_de_seguranca" style="font-size: 13px;font-weight: 400;padding-left: 20px;">Nº de segurança:</label>
-                                            <input autocomplete="off" type="text" name="numero_de_seguranca" onblur="ValidarDadoValidadeCartao()" placeholder="XXX" id="numeroSeg" required="" maxlength="4" style="background-color: #fff;height: 35px;font-size: 13px;margin-left: 20px;width: 89%;" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="margin_2_top divider">
-
-                            </div>
-                            <br>
-                            <h4 class="margin_2_top">Dados da fatura</h4>
-
-                            <div class="row">
-
-
-                                <div class="input-field col-lg-5">
-                                    <label class="wpte-bf-label" for="wp_travel_engine_booking_setting[place_order][booking][address]"> CEP</label>
-                                    <input autocomplete="off" type="text" name="cep" id="cep" onfocusout="buscarCEP()" required="" style="background-color: #fff">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="input-field col-lg-7 hide-on-med-and-down"></div>
-
-                                <div class="input-field col-lg-10">
-                                    <label class="wpte-bf-label" for="wp_travel_engine_booking_setting[place_order][booking][address]"> Endereço</label>
-                                    <input
-                                        type="text"
-                                        id="wp_travel_engine_booking_setting[place_order][booking][address]"
-                                        name="wp_travel_engine_booking_setting[place_order][booking][address]"
-                                        value=""
-                                        required="1"
-                                        maxlength="100"
-                                        class="endereco"
-                                        data-msg="Informe seu Endereço"
-                                        data-parsley-required-message="Informe seu Endereço" style="background-color: #fff"
-                                    />
-                                </div>
-
-                                <div class="input-field col-lg-2">
-                                    <label class="wpte-bf-label" for="wp_travel_engine_booking_setting[place_order][booking][address]"> Nº</label>
-                                    <input autocomplete="off" type="text" name="numero" id="numero" placeholder="" required="" style="background-color: #fff">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-
-                                <div class="input-field col-lg-4">
-                                    <label class="wpte-bf-label" for="wp_travel_engine_booking_setting[place_order][booking][address]"> Complemento</label>
-                                    <input autocomplete="off" type="text" name="complemento" id="complemento" placeholder="" style="background-color: #fff">
-                                </div>
-
-                                <div class="input-field col-lg-3">
-                                    <label class="wpte-bf-label" for="wp_travel_engine_booking_setting[place_order][booking][address]"> Bairro</label>
-                                    <input autocomplete="off" type="text" name="bairro" id="bairro" placeholder="" required="" style="background-color: #fff">
-                                </div>
-
-                                <div class="input-field col-lg-3">
-                                    <label class="wpte-bf-label" for="wp_travel_engine_booking_setting[place_order][booking][city]">
-                                Cidade</label>
-                                    <input
-                                type="text"
-                                id="wp_travel_engine_booking_setting[place_order][booking][city]"
-                                name="wp_travel_engine_booking_setting[place_order][booking][city]"
-                                value=""
-                                required="1"
-                                class="cidade"
-                                data-msg="Informe sua Cidade"
-                                data-parsley-required-message="Informe sua Cidade" style="background-color: #fff"
-                            />
-                                </div>
-
-                                <div class="input-field col-lg-2">
-                                    <label class="wpte-bf-label" for="wp_travel_engine_booking_setting[place_order][booking][address]"> UF</label>
-                                    <input autocomplete="off" type="text" name="uf" id="estado" placeholder="" required="" style="background-color: #fff" maxlength="2">
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div> -->
+                    <?php } ?> 
                         <br><br>
                         <h4 style="    font-size: 24px;font-weight: 600;"><i class="fa fa-lock"></i> Dados para contato</h4>
                         <div class="row">
@@ -638,8 +394,7 @@ $cart_items   = $wte_cart->getItems();
                     </form>
 
                     <?php do_action( 'wte_booking_after_checkout_form_close' ); ?>
-                </div><!-- .wpte-bf-checkout-form -->
-            <?php endif; ?>
+                </div><!-- .wpte-bf-checkout-form --> 
         </div><!-- .wpte-bf-step-content-wrap -->
     </div><!-- .wpte-bf-booking-steps -->
 </div><!-- .wpte-bf-outer -->

@@ -102,46 +102,9 @@ $token = generate_id_app();
 
         ) );
 
-    ?>
+    ?> 
 
-    <div class="wpte-field wpte-floated">
-
-        <label class="wpte-field-label"><?php _e( 'Tipo do roteiro', 'wp-travel-engine' ); ?></label>
-
-        <div class="wpte-multi-fields wpte-floated">
-
-            <input type="radio" name="wp_travel_engine_setting[trip_type]" value="0" <?=($trip_type == 0 || empty($trip_type) ? 'checked' : '')?> onclick="esconder_dados_cliente()"> <label style="position: relative;top: -3px;margin-right: 15px;">Público</label>
-            <input type="radio" name="wp_travel_engine_setting[trip_type]" value="1" onclick="exibe_dados_cliente()" <?=($trip_type == 1 ? 'checked' : '')?>> <label  style="position: relative;top: -3px;margin-right: 15px;">Tailor made</label>
-
-        </div>
-        <span class="wpte-tooltip"><?php esc_html_e( ' Informe se o roteiro é Público (pode ser pesquisado) ou Tailor made (específico)', 'wp-travel-engine' ) ?></span>
-        <br>
-
-        <div class="wpte-multi-fields wpte-floated" style="/* width: 64%; */border: 1px solid #ddd;padding: 28px;margin-top: 15px;<?=($trip_type == 1 ? 'display:block' : 'display:none')?>" id="dados_conta"> 
-
-            <div class="wpte-field wpte-text wpte-floated">
-
-                <label for="wp_travel_engine_settings[book_btn_txt]" class="wpte-field-label" style="font-weight: 500;padding-right: 8px"><?php _e('Nome do cliente','wp-travel-engine');?></label>
-
-                <input type="text" id="wp_travel_engine_setting[nome_cliente]" name="wp_travel_engine_setting[nome_cliente]" value="<?=$nome_cliente?>" placeholder="Nome do cliente"> 
-
-                <input type="hidden" id="wp_travel_engine_setting[token_cliente]" name="wp_travel_engine_setting[token_cliente]" value="<?=$token?>">
-
-            </div>
-
-            <div class="wpte-field wpte-text wpte-floated" >
-
-                <label for="wp_travel_engine_settings[book_btn_txt]" class="wpte-field-label" style="font-weight: 500;padding-right: 8px"><?php _e('E-mail do cliente','wp-travel-engine');?></label>
-
-                <input type="text" id="wp_travel_engine_setting[e_mail_cliente]" name="wp_travel_engine_setting[e_mail_cliente]" value="<?=$e_mail_cliente?>" placeholder="E-mail do cliente"> 
-
-            </div>
-
-        </div>  
-
-        
-
-    </div>
+    <input type="hidden" name="wp_travel_engine_setting[trip_type]" value="0">
 
     <div class="wpte-field wpte-floated">
 

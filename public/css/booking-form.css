@@ -2266,13 +2266,10 @@
 
 
 
-  .wpte-bf-checkout .wpte-bf-summary-wrap {
+  .wpte-bf-checkout .wpte-bf-summary-wrap { 
+    background: none;
 
-    padding: 10% 10% 0 10%;
-
-    background: rgba(var(--black-color-rgb), 0.01);
-
-    border: 1px solid rgba(var(--black-color-rgb), 0.05);
+    border: 0;
 
   }
 

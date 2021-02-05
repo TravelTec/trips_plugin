@@ -80,7 +80,7 @@ $payment_debug = isset( $wp_travel_engine_settings['payment_debug'] ) ? $wp_trav
                       CURLOPT_HTTPHEADER => array(
                         "cache-control: no-cache",
                         "content-type: application/json", 
-                        "url: wp01.montenegroev.com.br"
+                        "url: ".$_SERVER['HTTP_HOST']
                       ),
                     ));
 

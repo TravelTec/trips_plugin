@@ -45,8 +45,8 @@ $currency =wp_travel_engine_get_currency_code_or_symbol();
                 $data_entrada = explode("/", $entrada);
                 for ($i=0; $i < count($wp_travel_engine_setting['multiple_pricing']); $i++) { 
                     $data_saida = explode("/", $wp_travel_engine_setting['multiple_pricing'][$i]['adult']['inicio']);
- 
-                    if ($data_entrada[0] >= $data_saida[0] && $data_entrada[1] == $data_saida[1]) {
+                     
+                    if ($data_entrada[0] >= $data_saida[0] && $data_entrada[1] >= $data_saida[1]) {
                         $saida = $wp_travel_engine_setting['multiple_pricing'][$i]['adult']['termino'];
                     }
                 }
@@ -58,7 +58,7 @@ $currency =wp_travel_engine_get_currency_code_or_symbol();
                 echo "<input type='hidden' id='max_age_infant' value='".$wp_travel_engine_setting['multiple_pricing'][0]['infant']['max_age']."'>";
                 
             ?>
-            <div class="card" style="border-bottom: 1px solid #eee;text-align: justify !important;background-color: #fff;"> 
+            <div class="card" style="border: 1px solid #eee;text-align: justify !important;background-color: #fff;"> 
                             <div class="card-body" style="padding: 10px">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-12">
@@ -114,22 +114,22 @@ $currency =wp_travel_engine_get_currency_code_or_symbol();
     ?>
                                 <div class="row">
                                     <div class="col-lg-7 col-md-7 col-6">
-                                        <p style="margin-bottom: 0;color: #23527c;margin-top: 5px;font-weight: 700">Valor total</p>
+                                        <p style="margin-bottom: 0;color: #139298;margin-top: 5px;font-weight: 700">Valor total</p>
                                     </div> 
                                         <div class="col-lg-5 col-md-5 col-6" style="text-align: right;">
-                                            <p style="margin-bottom: 0;color: #23527c;margin-top: 5px;font-weight: 700" > <?php echo $wp_travel_engine_setting['multiple_pricing'][0]['adult']['currency_code'].'  '.str_replace(",", ".", number_format($payable_now.'00', 3,  ',', '.')).',00'; ?> </p>
+                                            <p style="margin-bottom: 0;color: #139298;margin-top: 5px;font-weight: 700" > <?php echo $wp_travel_engine_setting['multiple_pricing'][0]['adult']['currency_code'].'  '.str_replace(",", ".", number_format($payable_now.'00', 3,  ',', '.')).',00'; ?> </p>
                                         </div> 
                                 </div>
                             </div>
                         </div>
         <?php endforeach; ?>
 
-        <div class="card" style="border-top: 1px solid #eee;text-align: justify !important;padding: 10px;background-color: #fff;margin-top: 25px;"> 
+        <div class="card" style="border: 1px solid #eee;text-align: justify !important;padding: 10px;background-color: #fff;margin-top: 25px;"> 
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <strong>Informações da viagem</strong>  
-                                            <p style="font-size: 13px;font-weight: 700;margin-top: 12px;margin-bottom: 12px"><span style="background-color: #23527c;color: #fff;padding: 3px 10px 3px 10px;border-radius: 4px;margin-right: 12px;">Roteiro</span> <span style="font-weight: 700"></span></p>
+                                            <p style="font-size: 13px;font-weight: 700;margin-top: 12px;margin-bottom: 12px"><span style="background-color: #139298;color: #fff;padding: 3px 10px 3px 10px;border-radius: 4px;margin-right: 12px;">Roteiro</span> <span style="font-weight: 700"></span></p>
                                             <p style="font-size: 13px;fmargin-top: 12px;margin-bottom: 0;color: #555">Nome: <strong><?php echo esc_html( get_the_title( $cart_item['trip_id'] ) ); ?></strong></p>
                                             <p style="font-size: 13px; margin-top: 0px;margin-bottom: 0px;color: #555">Início da viagem: <strong><?=$entrada?></strong></p> 
                                             <p style="font-size: 13px; margin-top: 0px;margin-bottom: 4px;color: #555">Término da viagem: <strong><?=$saida?></strong></p> 
@@ -147,10 +147,10 @@ $currency =wp_travel_engine_get_currency_code_or_symbol();
 
                         <?php if (!empty($dados_cancelamento)) { ?>
 
-        <div class="card" style="border-top: 1px solid #eee;text-align: justify !important;padding: 0px;background-color: #23527c;margin-top: 25px;"> 
+        <div class="card" style="border-top: 1px solid #eee;text-align: justify !important;padding: 0px;background-color: #139298;margin-top: 25px;"> 
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-2" style="background-color: #23527c;text-align: center;height: 113px;padding-right: 0;">
+                                    <div class="col-lg-2" style="background-color: #139298;text-align: center;height: 113px;padding-right: 0;">
                 <i class="fa fa-info" style="font-size: 38px;color: #fff;padding-top: 10px;"></i>
             </div>   
             <div class="col-lg-10" style="background-color: #fff;padding-top: 13px;padding-bottom: 13px">

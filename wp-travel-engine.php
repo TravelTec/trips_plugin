@@ -2,15 +2,15 @@
 
 /*
 
-Plugin Name: WP Viagens
+Plugin Name: Voucher Tec - Roteiros de viagens
 
 Plugin URI: https://github.com/TravelTec/trips_plugin
 
 GitHub Plugin URI: https://github.com/TravelTec/trips_plugin
 
-Description: WP Viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus roteiros, compartilhar promoções, gerenciar suas reservas e manter contato com os clientes que desejam saber mais sobre seus pacotes. Tudo de forma rápida e intuitiva. 
+Description: Voucher Tec - Roteiros de viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus roteiros, compartilhar promoções, gerenciar suas reservas e manter contato com os clientes que desejam saber mais sobre seus pacotes. Tudo de forma rápida e intuitiva. 
 
-Version: 1.5.0
+Version: 1.5.1
 
 Author: Travel Tec
 

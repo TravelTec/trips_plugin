@@ -10,7 +10,7 @@ Requires at least: 4.7
 
 Tested up to: 5.5
 
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 
 Requires PHP: 5.4
 
@@ -20,7 +20,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 
 
-WP Viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus roteiros, compartilhar promoções, gerenciar suas reservas e manter contato com os clientes que desejam saber mais sobre seus pacotes. Tudo de forma rápida e intuitiva. 
+Voucher Tec - Roteiros de viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus roteiros, compartilhar promoções, gerenciar suas reservas e manter contato com os clientes que desejam saber mais sobre seus pacotes. Tudo de forma rápida e intuitiva. 
 
 
 
@@ -28,11 +28,15 @@ WP Viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus r
 
 
 
-WP Viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus roteiros, compartilhar promoções, gerenciar suas reservas e manter contato com os clientes que desejam saber mais sobre seus pacotes. Tudo de forma rápida e intuitiva.  
+Voucher Tec - Roteiros de viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus roteiros, compartilhar promoções, gerenciar suas reservas e manter contato com os clientes que desejam saber mais sobre seus pacotes. Tudo de forma rápida e intuitiva.  
 
 
 
 == Changelog ==
+
+= 1.5.1 =
+
+* Alteração do nome do plugin, inserção do template único "Destaques largura total" e inibição da funcionalidade "Tailor Made".
 
 
 = 1.5.0 =

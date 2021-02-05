@@ -1,3 +1,8 @@
+<style type="text/css">
+	.blog-lg-area-left{
+		text-align: center !important;
+	}
+</style>
 <?php
 
 /**
@@ -30,7 +35,7 @@ $roteiro_setting        = get_post_meta( $booking_metas['place_order']['tid'], '
 
 $extra_service_title = isset( $wte_settings['extra_service_title'] ) && ! empty( $wte_settings['extra_service_title'] ) ? $wte_settings['extra_service_title'] : __( 'Extra Services:', 'wp-travel-engine' );
 
-$currency_code = ($wte_settings['currency_code'] == 'BRL' ? 'R$' : $wte_settings['currency_code']);
+$currency_code = $roteiro_setting['multiple_pricing'][0]['adult']['currency_code'];
 
 if ( ! empty( $cart_items ) ) :
 
@@ -60,7 +65,7 @@ if ( ! empty( $cart_items ) ) :
 	<br>
 
 
-		<div class="thank-you-container" style="background-color: #fff;padding: 30px 24px;width: 600px;margin: 11px auto;">
+		<div class="thank-you-container" style="background-color: #fff;padding: 30px 24px;width: 600px;margin: 11px auto;text-align: center">
 
 			<h3 class="trip-details"><?php echo esc_html__( 'Resumo da viagem', 'wp-travel-engine' ); ?></h3>
 
@@ -118,6 +123,7 @@ if ( ! empty( $cart_items ) ) :
 			                $data_entrada = explode("/", $entrada);
 			                for ($i=0; $i < count($roteiro_setting['multiple_pricing']); $i++) { 
 			                    $data_saida = explode("/", $roteiro_setting['multiple_pricing'][$i]['adult']['inicio']);
+
 			 
 			                    if ($data_entrada[0] >= $data_saida[0] && $data_entrada[1] == $data_saida[1]) {
 			                        $saida = $roteiro_setting['multiple_pricing'][$i]['adult']['termino'];
@@ -135,10 +141,10 @@ if ( ! empty( $cart_items ) ) :
 				</div>
 				<?php for ( $i=1; $i <= $booking_metas['place_order']['traveler']; $i++ ) { ?>
 
-					<ul class="wpte-list" style="margin-bottom: 0;border-bottom: 1px solid #f2f2f2;">
+					<ul class="wpte-list" style="margin-bottom: 0;border-bottom: 1px solid #f2f2f2;padding-left: 0">
 
 
-                                                        <li> 
+                                                        <li style="list-style: none"> 
                                                 <?php 
 
                                                 $personal_options = $booking_metas['additional_fields']['wp_travel_engine_placeorder_setting']['place_order'];
@@ -437,7 +443,7 @@ if ( ! empty( $cart_items ) ) :
 
 						<span class="value" style="text-align: right;">
 
-							R$ 0,00
+							<?=$currency_code?> 0,00
 
 						</span>
 

@@ -12,8 +12,10 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
+$config               = get_post_meta(get_the_ID(), 'wp_travel_engine_setting', true); 
+$currency_code = $config['multiple_pricing'][0]['adult']['currency_code'];
 ?>
-<div class="category-trips-single" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" style="width: 33.33% !important">
+<div class="category-trips-single" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
     <div class="category-trips-single-inner-wrap">
         <figure class="category-trip-fig">
             <a href="<?php the_permalink(); ?>">
@@ -65,9 +67,9 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="category-trip-budget">
                 <span class="price-holder">
                     <?php if( $on_sale ) : ?>
-                    <span class="striked-price">U$ <?=$trip_price?></span>
+                    <span class="striked-price"><?=$currency_code?> <?=$trip_price?></span>
                     <?php endif; ?>
-                    <span class="actual-price">U$ <?=$trip_price?></span>
+                    <span class="actual-price"><?=$currency_code?> <?=$display_price?></span>
                 </span>
             </div>
             <?php }else{ ?>
