@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $config               = get_post_meta(get_the_ID(), 'wp_travel_engine_setting', true); 
 $currency_code = $config['multiple_pricing'][0]['adult']['currency_code'];
 ?>
-<div class="category-trips-single" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+<div class="category-trips-single col-lg-12 col-12" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
     <div class="category-trips-single-inner-wrap">
         <figure class="category-trip-fig">
             <a href="<?php the_permalink(); ?>">

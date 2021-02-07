@@ -349,7 +349,7 @@ class Wp_Travel_Engine_Archive_Hooks
 
 				?>
 
-				<div class="wte-category-outer-wrap">
+				<div class="wte-category-outer-wrap container">
 
 					<?php
 
@@ -367,7 +367,7 @@ class Wp_Travel_Engine_Archive_Hooks
 
 						}
 
-						echo '<div class="category-main-wrap '. esc_attr( $view_class ) .'">';						
+						echo '<div class="category-main-wrap row '. esc_attr( $view_class ) .'">';						
 
 							/**
 
