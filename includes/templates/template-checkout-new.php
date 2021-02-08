@@ -2,7 +2,8 @@
 <link rel="stylesheet" href="https://reservas.sidon.com.br/assets/css/sweetalert.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css">
 
-<?php
+<?php 
+
     global $wte_cart;
         global $post;
         $wp_travel_engine_setting = get_post_meta( $post->ID,'wp_travel_engine_setting',true ); 
@@ -11,21 +12,9 @@ $cart_items   = $wte_cart->getItems();
     $global_settings = wp_travel_engine_get_settings(); 
 
     $default_payment_gateway = isset( $global_settings['default_gateway'] ) && ! empty( $global_settings['default_gateway'] ) ? $global_settings['default_gateway'] : 'booking_only'; 
+ 
 
-        foreach( $cart_items as $key => $cart_item ) {
-            $wp_travel_engine_setting = get_post_meta( $cart_item['trip_id'],'wp_travel_engine_setting',true ); 
-            $duracao = $wp_travel_engine_setting['trip_duration']; 
-                $adults = $cart_item['pax']['adult'];
-                $qtd_pax = $adults;
-                if (!empty($cart_item['pax']['child'])) {
-                    $child = $cart_item['pax']['child'];
-                    $qtd_pax = $adults+$child;
-                } 
-                if (!empty($cart_item['pax']['infant'])) {
-                    $infant = $cart_item['pax']['infant'];
-                    $qtd_pax = $adults+$child+$infant;
-                }
-        }
+        $qtd_pax = 6; 
  
             $status_pagamento = 0;
 
@@ -71,8 +60,7 @@ $cart_items   = $wte_cart->getItems();
                             wp_nonce_field( 'wp_travel_engine_new_booking_process_nonce_action', 'wp_travel_engine_new_booking_process_nonce' );
                         ?>
                         <input type="hidden" name="_wp_http_referer" value="/?page_id=11" />
-                        <h4 style="    font-size: 24px;font-weight: 600;"><i class="fa fa-user"></i> Dados dos hóspedes</h4>
-                        <?php for ($i=0; $i < $qtd_pax; $i++) {  ?>
+                        <h4 style="    font-size: 24px;font-weight: 600;"><i class="fa fa-user"></i> Dados dos hóspedes</h4> 
                         <?php
 
     /**
@@ -216,7 +204,15 @@ $cart_items   = $wte_cart->getItems();
 
 
             $i = 1;
-            foreach( $cart_item['pax'] as $pax_label => $pax ) {
+
+            foreach( $cart_items as $key => $cart_item ) { 
+                $pax_array = $cart_item['pax'];
+
+            } 
+
+            $contador = 1;
+            foreach( $pax_array as $pax_label => $pax ) {
+
                 if ( $pax == '0' ) continue;
 
                 echo '<div class=" "> </div>';
@@ -224,74 +220,79 @@ $cart_items   = $wte_cart->getItems();
  
 
                                     if ($pax_label == 'adult') {
-                                        $pax_label_disp = ($pax > 1 ? 'Adultos' : 'Adulto'); 
+                                        $pax_label_disp = ($pax > 1 ? 'Adulto' : 'Adulto'); 
                                         $onclick = '';
                                     }else if ($pax_label == 'child') {
-                                        $pax_label_disp = ($pax > 1 ? 'Crianças' : 'Criança'); 
-                                        $onclick = 'return validar_data_child('.$i.')';
+                                        $pax_label_disp = ($pax > 1 ? 'Criança' : 'Criança'); 
+                                        $onclick = 'return validar_data_child('.$contador.')';
                                     }else if ($pax_label == 'infant') {
-                                        $pax_label_disp = ($pax > 1 ? 'Bebês' : 'Bebê'); 
-                                        $onclick = 'return validar_data_infant('.$i.')';
+                                        $pax_label_disp = ($pax > 1 ? 'Bebê' : 'Bebê'); 
+                                        $onclick = 'return validar_data_infant('.$contador.')';
                                     }else if ($pax_label == 'group') {
-                                        $pax_label_disp = ($pax > 1 ? 'Grupos' : 'Grupo'); 
+                                        $pax_label_disp = ($pax > 1 ? 'Grupo' : 'Grupo'); 
                                         $onclick = '';
                                     } 
 
+                
 
+                for ($z=0; $z < $pax; $z++) {  
 
-                echo ' 
+                    echo ' 
 
-                 <div class="wpte-bf-field wpte-cf-text col-lg-1 text-center" style="padding: 9px;">
-                 <i class="fa fa-user" style="font-size:22px"></i><br><label style="font-size:12px !important">'.$pax_label_disp.'</label>
-                 </div>
+                     <div class="wpte-bf-field wpte-cf-text col-lg-1 text-center" style="padding: 9px;">
+                     <i class="fa fa-user" style="font-size:22px"></i><br><label style="font-size:12px !important">'.$pax_label_disp.'</label>
+                     </div>
 
-                 <div class="wpte-bf-field wpte-cf-text col-lg-3">
-                <label class="" for="wp_travel_engine_placeorder_setting[place_order][travelers][fname]['.$i.']">
+                     <div class="wpte-bf-field wpte-cf-text col-lg-3">
+                    <label class="" for="wp_travel_engine_placeorder_setting[place_order][travelers][fname]['.$contador.']">
 
-                    Nome:
-                    
-                        <span class="required">*</span>
+                        Nome:
+                        
+                            <span class="required">*</span>
 
-                    
-                </label>
-                <input type="text" id="wp_travel_engine_placeorder_setting[place_order][travelers][fname]['.$i.']" name="wp_travel_engine_placeorder_setting[place_order][travelers][fname]['.$i.']" value="" required="1" maxlength="50" class="">            </div>
+                        
+                    </label>
+                    <input type="text" id="wp_travel_engine_placeorder_setting[place_order][travelers][fname]['.$contador.']" name="wp_travel_engine_placeorder_setting[place_order][travelers][fname]['.$contador.']" value="" required="1" maxlength="50" class="">            </div>
 
-                    <div class="wpte-bf-field wpte-cf-text col-lg-3">
-                <label class="" for="wp_travel_engine_placeorder_setting[place_order][travelers][lname]['.$i.']">
+                        <div class="wpte-bf-field wpte-cf-text col-lg-3">
+                    <label class="" for="wp_travel_engine_placeorder_setting[place_order][travelers][lname]['.$contador.']">
 
-                    Último sobrenome:
-                    
-                        <span class="required">*</span>
+                        Último sobrenome:
+                        
+                            <span class="required">*</span>
 
-                    
-                </label>
-                <input type="text" id="wp_travel_engine_placeorder_setting[place_order][travelers][lname]['.$i.']" name="wp_travel_engine_placeorder_setting[place_order][travelers][lname]['.$i.']" value="" required="1" maxlength="50" class="">            </div>
+                        
+                    </label>
+                    <input type="text" id="wp_travel_engine_placeorder_setting[place_order][travelers][lname]['.$contador.']" name="wp_travel_engine_placeorder_setting[place_order][travelers][lname]['.$contador.']" value="" required="1" maxlength="50" class="">            </div>
 
-                    <div class="wpte-bf-field wpte-cf-text col-lg-3">
-                <label class="" for="wp_travel_engine_placeorder_setting[place_order][travelers][dob]['.$i.']">
+                        <div class="wpte-bf-field wpte-cf-text col-lg-3">
+                    <label class="" for="wp_travel_engine_placeorder_setting[place_order][travelers][dob]['.$contador.']">
 
-                    Nascimento:
-                    
-                        <span class="required">*</span>
+                        Nascimento:
+                        
+                            <span class="required">*</span>
 
-                    
-                </label>
-                <input type="text" id="wp_travel_engine_placeorder_setting[place_order][travelers][dob]['.$i.']" name="wp_travel_engine_placeorder_setting[place_order][travelers][dob]['.$i.']" required="1" maxlength="50" class="nasc nasc_pax_'.$i.'" onblur="'.$onclick.'">            </div>
+                        
+                    </label>
+                    <input type="text" id="wp_travel_engine_placeorder_setting[place_order][travelers][dob]['.$contador.']" name="wp_travel_engine_placeorder_setting[place_order][travelers][dob]['.$contador.']" required="1" maxlength="50" class="nasc nasc_pax_'.$contador.'" onblur="'.$onclick.'">            </div>
 
-                    <div class="wpte-bf-field wpte-cf-text col-lg-2">
-                <label class="" for="wp_travel_engine_placeorder_setting[place_order][travelers][title]['.$i.']">
+                        <div class="wpte-bf-field wpte-cf-text col-lg-2">
+                    <label class="" for="wp_travel_engine_placeorder_setting[place_order][travelers][title]['.$contador.']">
 
-                    Gênero:
-                    
-                        <span class="required">*</span>
+                        Gênero:
+                        
+                            <span class="required">*</span>
 
-                    
-                </label>
-                <select id="wp_travel_engine_placeorder_setting[place_order][travelers][title]['.$i.']" name="wp_travel_engine_placeorder_setting[place_order][travelers][title]['.$i.']" class="" required="1"><option value="" selected="">Escolha</option><option value="Feminino">Feminino</option><option value="Masculino">Masculino</option></select>            </div>';
+                        
+                    </label>
+                    <select id="wp_travel_engine_placeorder_setting[place_order][travelers][title]['.$contador.']" name="wp_travel_engine_placeorder_setting[place_order][travelers][title]['.$contador.']" class="" required="1"><option value="" selected="">Escolha</option><option value="Feminino">Feminino</option><option value="Masculino">Masculino</option></select>            </div>';
 
-        
+                    $contador++;
+                }
 
-                echo '</div>';
+            
+
+                    echo '</div>';
 
                 $i++;
 
@@ -303,8 +304,7 @@ $cart_items   = $wte_cart->getItems();
 
             <input type="hidden" name="nonce" value="<?php echo $nonce;?>"> 
         </section> 
-
-                    <?php } ?> 
+ 
                         <br><br>
                         <h4 style="    font-size: 24px;font-weight: 600;"><i class="fa fa-lock"></i> Dados para contato</h4>
                         <div class="row">
@@ -428,14 +428,23 @@ $cart_items   = $wte_cart->getItems();
         var data_pax = campo.split("/");
 
         var valor = year-data_pax[2];
-        if (valor >= min_age_child && valor <= max_age_child) {
-
-        }else{
+        console.log(valor);
+        if (data_pax[0] > '08' || data_pax[1] > '02' || data_pax[2] > '2021') {
             return Swal.fire({
                 title: "Ops!",
-                text: "Data inválida para o hóspede do tipo criança. Para ser aceita, a criança precisa ter entre "+min_age_child+" e "+max_age_child+" anos.",
+                text: "Data inválida para o hóspede do tipo criança.",
                 icon: "error",
             });
+        }else{
+            if (valor >= min_age_child && valor <= max_age_child) {
+
+            }else{
+                return Swal.fire({
+                    title: "Ops!",
+                    text: "Data inválida para o hóspede do tipo criança. Para ser aceita, a criança precisa ter entre "+min_age_child+" e "+max_age_child+" anos.",
+                    icon: "error",
+                });
+            }
         }
     }  
 
@@ -452,14 +461,22 @@ $cart_items   = $wte_cart->getItems();
 
         var valor = year-data_pax[2];
         console.log(valor);
-        if (valor >= min_age_infant && valor <= max_age_infant) {
-
-        }else{
+        if (data_pax[0] > '08' || data_pax[1] > '02' || data_pax[2] > '2021') {
             return Swal.fire({
                 title: "Ops!",
-                text: "Data inválida para o hóspede do tipo bebê. Para ser aceito, o bebê precisa ter entre "+min_age_infant+" e "+max_age_infant+" anos.",
+                text: "Data inválida para o hóspede do tipo bebê.",
                 icon: "error",
             });
+        }else{
+            if (valor >= min_age_infant && valor <= max_age_infant) {
+
+            }else{
+                return Swal.fire({
+                    title: "Ops!",
+                    text: "Data inválida para o hóspede do tipo bebê. Para ser aceito, o bebê precisa ter entre "+min_age_infant+" e "+max_age_infant+" anos.",
+                    icon: "error",
+                });
+            }
         }
     }
 </script>

@@ -1,4 +1,22 @@
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function ($) { 
+    var scre = $("body").width();
+        if ( scre >= 769 ) { 
+                $(".tab-roteiro0").addClass("nav-tab-active"); 
+        } 
+        if ( scre <= 768 ) {
+            $(".nav-tab").removeClass("nav-tab-active");
+        } 
+        
+    $(window).resize(function() { 
+        var scre = $("body").width();
+        if ( scre >= 769 ) { 
+                $(".tab-roteiro0").addClass("nav-tab-active"); 
+        } 
+        if ( scre <= 768 ) {
+            $(".nav-tab").removeClass("nav-tab-active");
+        } 
+    });
+
     var currentTab = $(".wpte-bf-step.active");
     var currentTabContent = $(".wpte-bf-step-content.active");
     var isDateSelected = false;

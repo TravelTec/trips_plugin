@@ -223,6 +223,11 @@ class Wp_Travel_Engine_Public {
 		} else {
 			wp_localize_script( $this->plugin_name, 'rtl', array( 'enable' => '0' ) );
 		}
+ 
+
+			wp_register_script( 'all', plugin_dir_url( __FILE__ ) . 'js/lib/fontawesome/all.min.js', array(), '5.6.3', true );
+			wp_register_script( 'v4-shims', plugin_dir_url( __FILE__ ) . 'js/lib/fontawesome/v4-shims.min.js', array(), '5.6.3', true );
+ 
 
 		// Libraraies.
 		wp_register_script( 'owl-carousel', plugin_dir_url( __FILE__ ) . 'js/lib/owl.carousel.js', array( 'jquery' ), '2.3.4', true );
@@ -231,12 +236,7 @@ class Wp_Travel_Engine_Public {
 		wp_register_script( 'magnific-popup', plugin_dir_url( __FILE__ ) . 'js/lib/magnific-popup.min.js', array( 'jquery' ), '2.9.2', true );
 		wp_register_script( 'jquery-steps', plugin_dir_url( __FILE__ ) . 'js/lib/jquery-steps.min.js', array( 'jquery', 'jquery-ui-core' ), $this->version, true );
 		wp_register_script( 'jquery-validate', plugin_dir_url( __FILE__ ) . 'js/lib/jquery.validate.min.js', array( 'jquery' ), '1.19.1', true );
-		if(isset($_GET['trip'])){
-
-			wp_register_script( 'all', plugin_dir_url( __FILE__ ) . 'js/lib/fontawesome/all.min.js', array(), '5.6.3', true );
-			wp_register_script( 'v4-shims', plugin_dir_url( __FILE__ ) . 'js/lib/fontawesome/v4-shims.min.js', array(), '5.6.3', true );
-
-		}
+		
 
 		wp_register_script( 'toastr', plugin_dir_url( __FILE__ ) . 'js/lib/toastr.min.js', array( 'jquery' ), null, true );
 		wp_register_script( 'jquery-sticky-kit', plugin_dir_url( __FILE__ ) . 'js/lib/jquery.sticky-kit.js', array( 'jquery' ), null, true );

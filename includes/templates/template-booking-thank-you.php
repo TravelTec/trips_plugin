@@ -138,7 +138,8 @@ if ( ! empty( $cart_items ) ) :
 
 				<div class="detail-item">
 					<h3 style="margin-bottom: 0;font-size: 22px">Passageiros</h3>
-				</div>
+				</div>  
+				<?php $personal_options = $booking_metas['additional_fields']['wp_travel_engine_placeorder_setting']['place_order']; ?> 
 				<?php for ( $i=1; $i <= $booking_metas['place_order']['traveler']; $i++ ) { ?>
 
 					<ul class="wpte-list" style="margin-bottom: 0;border-bottom: 1px solid #f2f2f2;padding-left: 0">
@@ -147,7 +148,7 @@ if ( ! empty( $cart_items ) ) :
                                                         <li style="list-style: none"> 
                                                 <?php 
 
-                                                $personal_options = $booking_metas['additional_fields']['wp_travel_engine_placeorder_setting']['place_order'];
+                                                
 
                                                 foreach( $personal_options['travelers'] as $key => $value ) : 
 

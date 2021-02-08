@@ -6819,7 +6819,7 @@ TOAST MESSAGE STYLE
 
         padding: 0 15px;
 
-        margin: 0 0 60px;
+        margin: 0 0 22px;
 
         float: none;
 
@@ -6888,6 +6888,31 @@ TOAST MESSAGE STYLE
 
 
 @media only screen and (max-width: 767px) {
+
+    #tabs-container .nav-tab-wrapper .tab-inner-wrapper{
+        display: block !important;
+    }
+    #tabs-container .tab-inner-wrapper .tab-anchor-wrapper .nav-tab-active{
+        -webkit-transform: inherit !important; 
+        transform: inherit !important;
+    }
+    .nb-configurations{
+        display: none;
+    }
+    .category-main-wrap.category-grid.col-2 .category-trips-single,
+
+    .category-main-wrap.category-grid.col-3 .category-trips-single,
+
+    .category-main-wrap.category-grid.col-4 .category-trips-single {
+
+        width: 100% !important;
+
+        padding: 5px 0 !important;
+
+    }
+    #tabs-container .tab-content{
+        padding: 0px !important;
+    }
 
     .wp-travel-engine-billing-details-field-wrap,
 
@@ -7064,10 +7089,7 @@ TOAST MESSAGE STYLE
     }
 
 }
-
-
-
-@media only screen and (max-width: 600px) {
+ 
 
     .page-template-template-destination .destination-holder .item {
 
@@ -7091,9 +7113,9 @@ TOAST MESSAGE STYLE
 
     .category-main-wrap.category-grid.col-4 .category-trips-single {
 
-        width: 100%;
+        width: 33.3%;
 
-        padding: 5px 0;
+        padding: 5px 22.5px;
 
     }
 
@@ -7125,10 +7147,10 @@ TOAST MESSAGE STYLE
     width: 60px;
     height: 3px;
     background: #123044;
-}
+}  
 
-iframe {
-    width: 762px !important;
+iframe { 
+  width: 100%; 
 }
 
 #tabs-container .nav-tab-wrapper {
