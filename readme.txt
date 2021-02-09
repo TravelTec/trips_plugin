@@ -10,7 +10,7 @@ Requires at least: 4.7
 
 Tested up to: 5.5
 
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 
 Requires PHP: 5.4
 
@@ -33,6 +33,11 @@ Voucher Tec - Roteiros de viagens é um plugin de gerenciamento de viagens. Voc�
 
 
 == Changelog ==
+
+= 1.5.4 =
+
+* Remoção do bloco de tipo de listagem/ordenação na listagem geral de roteiros.
+
 
 = 1.5.3 =
 
