@@ -225,6 +225,13 @@ if ( ! empty( $cart_items ) ) :
 
 					<?php  
 
+					foreach( $cart_item['pax'] as $pax_label => $pax ) {
+                                    if ( $pax == '0' ) continue;
+
+                                    $total += $cart_item['pax_cost'][ $pax_label ]*$cart_item['pax'][$pax_label];
+
+                } 
+
 						foreach ( $cart_item['pax'] as $pax_key => $pax ) :
 
  
@@ -242,7 +249,7 @@ if ( ! empty( $cart_items ) ) :
 
 							$pax_label         = wte_get_pricing_label_by_key_invoices( $cart_item['trip_id'], $pax_key, $pax );
 
-							$per_pricing_price = ($pax == 0 ? '0,00' : ( $cart_item['pax_cost'][ $pax_key ] / $pax ));
+							$per_pricing_price = ($pax == 0 ? '0,00' : ( $cart_item['pax_cost'][ $pax_key ] ));
 
 							?>
 
@@ -464,7 +471,7 @@ if ( ! empty( $cart_items ) ) :
 
 							} else {
 
-								echo '<strong>'.$currency_code. ' '.$cart_totals['cart_total'].',00</strong>';
+								echo '<strong>'.$currency_code. ' '.number_format($total, 2,  ',', '.').'</strong>';
  
 
 							}

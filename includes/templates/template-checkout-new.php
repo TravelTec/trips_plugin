@@ -44,7 +44,7 @@ $cart_items   = $wte_cart->getItems();
         ?>
         <div class="wpte-bf-step-content-wrap">
 
-            <div class="wpte-bf-book-summary" style="width: 27%">
+            <div class="wpte-bf-book-summary" style="width: 27%;padding: 0">
                 <?php
                     do_action( 'wte_booking_before_minicart' );
                     wte_get_template( 'checkout/mini-cart.php' );
@@ -216,7 +216,7 @@ $cart_items   = $wte_cart->getItems();
                 if ( $pax == '0' ) continue;
 
                 echo '<div class=" "> </div>';
-                echo '<div class="row">';
+                echo '<div class="row" style="margin: 0">';
  
 
                                     if ($pax_label == 'adult') {
@@ -307,7 +307,7 @@ $cart_items   = $wte_cart->getItems();
  
                         <br><br>
                         <h4 style="    font-size: 24px;font-weight: 600;"><i class="fa fa-lock"></i> Dados para contato</h4>
-                        <div class="row">
+                        <div class="row" style="margin: 0">
                             <div class="wpte-bf-field wpte-cf-text col-lg-6">
                                 <label class="wpte-bf-label" for="telefone">
                                     Nome completo
@@ -345,7 +345,7 @@ $cart_items   = $wte_cart->getItems();
                                 />
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin: 0">
                             <div class="wpte-bf-field wpte-cf-email col-lg-6">
                                 <label class="wpte-bf-label" for="wp_travel_engine_booking_setting[place_order][booking][email]">
                                     Email
@@ -402,7 +402,7 @@ $cart_items   = $wte_cart->getItems();
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
-<script src="/wp-content/plugins/trips_plugin/admin/js/jquery.mask.js"></script>
+<script src="/wp-content/plugins/trips_plugin-1.5.2/admin/js/jquery.mask.js"></script>
 <script src="https://reservas.sidon.com.br/assets/js/sweetalert.js"></script>
 <script src="https://reservas.sidon.com.br/assets/js/jquery.creditCardValidator.js"></script>
 <script src="/wp-content/plugins/trips_plugin/admin/js/validarcartao2.js"></script>
@@ -429,7 +429,7 @@ $cart_items   = $wte_cart->getItems();
 
         var valor = year-data_pax[2];
         console.log(valor);
-        if (data_pax[0] > '08' || data_pax[1] > '02' || data_pax[2] > '2021') {
+        if (data_pax[0] > '13' && data_pax[1] > '02' || data_pax[2] > '2021') {
             return Swal.fire({
                 title: "Ops!",
                 text: "Data inválida para o hóspede do tipo criança.",
@@ -461,7 +461,7 @@ $cart_items   = $wte_cart->getItems();
 
         var valor = year-data_pax[2];
         console.log(valor);
-        if (data_pax[0] > '08' || data_pax[1] > '02' || data_pax[2] > '2021') {
+        if (data_pax[0] > '13' || data_pax[1] > '02' || data_pax[2] > '2021') {
             return Swal.fire({
                 title: "Ops!",
                 text: "Data inválida para o hóspede do tipo bebê.",

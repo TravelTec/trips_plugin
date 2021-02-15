@@ -7,14 +7,14 @@
 
 		
 		for ($i=0; $i < count($wp_travel_engine_setting['multiple_pricing']); $i++) { 
-			$valores[] = array('adulto' => $wp_travel_engine_setting['multiple_pricing'][$i]['adult']['price'], 'crianca' => $wp_travel_engine_setting['multiple_pricing'][$i]['child']['price'], 'bebe' => $wp_travel_engine_setting['multiple_pricing'][$i]['infant']['price'], 'grupo' => $wp_travel_engine_setting['multiple_pricing'][$i]['group']['price'], 'inicio' => implode("-", array_reverse(explode("/", $wp_travel_engine_setting['multiple_pricing'][$i]['adult']['inicio']))), 'termino' => implode("-", array_reverse(explode("/", $wp_travel_engine_setting['multiple_pricing'][$i]['adult']['termino']))));
+			$valores[] = array('adulto' => (empty($wp_travel_engine_setting['multiple_pricing'][$i]['adult']['sale_price']) ? $wp_travel_engine_setting['multiple_pricing'][$i]['adult']['price'] : $wp_travel_engine_setting['multiple_pricing'][$i]['adult']['sale_price']), 'crianca' => (empty($wp_travel_engine_setting['multiple_pricing'][$i]['child']['sale_price']) ? $wp_travel_engine_setting['multiple_pricing'][$i]['child']['price'] : $wp_travel_engine_setting['multiple_pricing'][$i]['child']['sale_price']), 'bebe' => (empty($wp_travel_engine_setting['multiple_pricing'][$i]['infant']['sale_price']) ? $wp_travel_engine_setting['multiple_pricing'][$i]['infant']['price'] : $wp_travel_engine_setting['multiple_pricing'][$i]['infant']['sale_price']), 'grupo' => (empty($wp_travel_engine_setting['multiple_pricing'][$i]['group']['sale_price']) ? $wp_travel_engine_setting['multiple_pricing'][$i]['group']['price'] : $wp_travel_engine_setting['multiple_pricing'][$i]['group']['sale_price']), 'inicio' => implode("-", array_reverse(explode("/", $wp_travel_engine_setting['multiple_pricing'][$i]['adult']['inicio']))), 'termino' => implode("-", array_reverse(explode("/", $wp_travel_engine_setting['multiple_pricing'][$i]['adult']['termino']))));
 		}
 		usort($valores, function($d1, $d2){
 		    $t1 = strtotime($d1['inicio']);
 		    $t2 = strtotime($d2['inicio']);
 		    if ($t1 === $t2) return 0;
 		    return ($t1 < $t2) ? -1 : 1;
-		}); 
+		});  
 
 		for ($i=0; $i < count($valores); $i++) {   
 

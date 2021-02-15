@@ -45,6 +45,15 @@ get_header(); ?>
                     </div>
                 </div> 
 
+<div class="page-builder">
+
+    <div class="container-fluid">
+
+        <div class="row justify-content-center">
+
+         <!-- Blog Area -->
+
+            <div class="col-md-12">
 <div id="wp-travel-trip-wrapper" class="trip-content-area" itemscope itemtype="http://schema.org/LocalBusiness" >
 
     <div class="wp-travel-inner-wrapper">
@@ -197,6 +206,10 @@ get_header(); ?>
 
     </div>
 
+</div>
+</div>
+</div>
+</div>
 </div>
 
 <?php get_footer();

@@ -362,9 +362,9 @@ class WP_Travel_Engine_Emails {
 
 			'{tprice}'                    => wp_travel_engine_get_formated_price_with_currency( wp_travel_engine_get_actual_trip_price( $trip_id, true ), null, true ),
 
-			'{price}'                     => $currency_code.' '.$order_details['place_order']['cost'].',00',
+			'{price}'                     => $order_details['place_order']['currency_code'].' '.$order_details['place_order']['cost_formatted'],
 
-			'{total_cost}'                => wp_travel_engine_get_formated_price_with_currency( $total, null, true ),
+			'{total_cost}'                =>json_encode($wp_travel_engine_settings),
 
 			'{due}'                       => wp_travel_engine_get_formated_price_with_currency( $order_details['place_order']['due'], null, true ),
 

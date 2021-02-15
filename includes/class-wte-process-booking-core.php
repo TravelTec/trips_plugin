@@ -95,6 +95,11 @@ class WTE_Process_Booking_Core {
 
 		$valor_total = $cart_total['total'];
 
+		foreach( $cart_items as $key => $cart_item ) {
+          	$wp_travel_engine_setting = get_post_meta( $cart_item['trip_id'],'wp_travel_engine_setting',true ); 
+			$currency_code = $wp_travel_engine_setting['multiple_pricing'][0]['adult']['currency_code'];
+		}
+
 
 
 		if ( empty( $cart_items ) ) {
@@ -129,7 +134,11 @@ class WTE_Process_Booking_Core {
 
 				'place_order' => array(
 
+					'currency_code' => esc_attr( $currency_code ),
+
 					'traveler' => esc_attr( array_sum( $pax ) ),
+
+					'cost_formatted'     => esc_attr( $total_paid ).'0,00',
 
 					'cost'     => esc_attr( $total_paid ),
 

@@ -8,7 +8,7 @@ global $wte_cart;
         global $post;
         $wp_travel_engine_setting = get_post_meta( $post->ID,'wp_travel_engine_setting',true );
 
-$cart_items   = $wte_cart->getItems();   
+$cart_items   = $wte_cart->getItems();  
 $date_format  = get_option( 'date_format' );
 $cart_totals  = $wte_cart->get_total(false);
 $wte_settings = get_option( 'wp_travel_engine_settings' );
@@ -56,11 +56,18 @@ $currency =wp_travel_engine_get_currency_code_or_symbol();
                 echo "<input type='hidden' id='max_age_child' value='".$wp_travel_engine_setting['multiple_pricing'][0]['child']['max_age']."'>";
                 echo "<input type='hidden' id='min_age_infant' value='".$wp_travel_engine_setting['multiple_pricing'][0]['infant']['min_age']."'>";
                 echo "<input type='hidden' id='max_age_infant' value='".$wp_travel_engine_setting['multiple_pricing'][0]['infant']['max_age']."'>";
+
+                foreach( $cart_item['pax'] as $pax_label => $pax ) {
+                                    if ( $pax == '0' ) continue;
+
+                                    $total += $cart_item['pax_cost'][ $pax_label ]*$cart_item['pax'][$pax_label];
+
+                } 
                 
             ?>
             <div class="card" style="border: 1px solid #eee;text-align: justify !important;background-color: #fff;"> 
                             <div class="card-body" style="padding: 10px">
-                                <div class="row">
+                                <div class="row" style="margin: 0">
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <strong>Tarifa por hóspede</strong>
                                     </div> 
@@ -82,7 +89,7 @@ $currency =wp_travel_engine_get_currency_code_or_symbol();
                                         $info_adicional = '';
                                     }
                                 ?>
-                                    <div class="row">
+                                    <div class="row" style="margin: 0">
                                         <div class="col-lg-7 col-md-7 col-7">
                                             <small style="color: #555;font-weight: 500"><?php printf( __( '%2$s', 'wp-travel-engine' ), number_format_i18n( $pax ), ucfirst( $pax_label_disp ) ); ?> (<?php printf( __( '%1$s', 'wp-travel-engine' ), number_format_i18n( $pax ), ucfirst( $pax_label_disp ) ); ?>)</small><?=$info_adicional;?>
                                         </div>
@@ -91,7 +98,7 @@ $currency =wp_travel_engine_get_currency_code_or_symbol();
                                         </div>
                                     </div> 
                                 <?php endforeach; ?> 
-                                <div class="row">
+                                <div class="row" style="margin: 0">
                                     <div class="col-lg-7 col-md-7 col-7">
                                         <small style="color: #555;font-weight: 500">Taxas e encargos</small>
                                     </div>
@@ -110,14 +117,14 @@ $currency =wp_travel_engine_get_currency_code_or_symbol();
 
         $payable_now = wp_travel_engine_is_trip_partially_payable( $cart_item['trip_id'] ) ? $cart_totals['total_partial'] : $cart_totals['cart_total'];
 
-        echo "<input type='hidden' id='total_roteiro' value='".str_replace(",", "", number_format($payable_now.'00', 3,  ',', '.')).'.00'."'>";
+        echo "<input type='hidden' id='total_roteiro' value='".number_format($total, 2,  ',', '.')."'>";
     ?>
-                                <div class="row">
+                                <div class="row" style="margin: 0">
                                     <div class="col-lg-7 col-md-7 col-6">
                                         <p style="margin-bottom: 0;color: #139298;margin-top: 5px;font-weight: 700">Valor total</p>
                                     </div> 
                                         <div class="col-lg-5 col-md-5 col-6" style="text-align: right;">
-                                            <p style="margin-bottom: 0;color: #139298;margin-top: 5px;font-weight: 700" > <?php echo $wp_travel_engine_setting['multiple_pricing'][0]['adult']['currency_code'].'  '.str_replace(",", ".", number_format($payable_now.'00', 3,  ',', '.')).',00'; ?> </p>
+                                            <p style="margin-bottom: 0;color: #139298;margin-top: 5px;font-weight: 700" > <?php echo $wp_travel_engine_setting['multiple_pricing'][0]['adult']['currency_code'].'  '.number_format($total, 2,  ',', '.'); ?> </p>
                                         </div> 
                                 </div>
                             </div>
@@ -126,7 +133,7 @@ $currency =wp_travel_engine_get_currency_code_or_symbol();
 
         <div class="card" style="border: 1px solid #eee;text-align: justify !important;padding: 10px;background-color: #fff;margin-top: 25px;"> 
                             <div class="card-body">
-                                <div class="row">
+                                <div class="row" style="margin: 0">
                                     <div class="col-lg-12">
                                         <strong>Informações da viagem</strong>  
                                             <p style="font-size: 13px;font-weight: 700;margin-top: 12px;margin-bottom: 12px"><span style="background-color: #139298;color: #fff;padding: 3px 10px 3px 10px;border-radius: 4px;margin-right: 12px;">Roteiro</span> <span style="font-weight: 700"></span></p>
@@ -149,7 +156,7 @@ $currency =wp_travel_engine_get_currency_code_or_symbol();
 
         <div class="card" style="border-top: 1px solid #eee;text-align: justify !important;padding: 0px;background-color: #139298;margin-top: 25px;"> 
                             <div class="card-body">
-                                <div class="row">
+                                <div class="row" style="margin: 0">
                                     <div class="col-lg-2" style="background-color: #139298;text-align: center;height: 113px;padding-right: 0;">
                 <i class="fa fa-info" style="font-size: 38px;color: #fff;padding-top: 10px;"></i>
             </div>   

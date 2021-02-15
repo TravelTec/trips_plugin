@@ -1480,7 +1480,7 @@
 
                             r.done(function () {
 
-                                jQuery("#button_reserva").html('<img src="http://wp01.montenegroev.com.br/wp-content/plugins/trips_plugin/admin/css/loader.gif" style="height: 34px;margin: 0 auto;">'); 
+                                jQuery("#button_reserva").html('<img src="http://wp01.montenegroev.com.br/wp-content/plugins/trips_plugin-1.5.2/admin/css/loader.gif" style="height: 34px;margin: 0 auto;">'); 
                                 
 
                             }));
@@ -1509,7 +1509,7 @@
 
                 }
 
-                jQuery("#button_reserva").html('<img src="http://wp01.montenegroev.com.br/wp-content/plugins/trips_plugin/admin/css/loader.gif" style="height: 34px;margin: 0 auto;">'); 
+                jQuery("#button_reserva").html('<img src="http://wp01.montenegroev.com.br/wp-content/plugins/trips_plugin-1.5.2/admin/css/loader.gif" style="height: 34px;margin: 0 auto;">'); 
 
             }
 
@@ -1579,7 +1579,7 @@
 
                 .done(function () {
 
-                    jQuery("#button_reserva").html('<img src="http://wp01.montenegroev.com.br/wp-content/plugins/trips_plugin/admin/css/loader.gif" style="height: 34px;margin: 0 auto;">'); 
+                    jQuery("#button_reserva").html('<img src="http://wp01.montenegroev.com.br/wp-content/plugins/trips_plugin-1.5.2/admin/css/loader.gif" style="height: 34px;margin: 0 auto;">'); 
                 })
 
                 .fail(function () {

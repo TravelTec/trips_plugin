@@ -7370,6 +7370,7 @@ button:hover, input[type="button"]:hover, input[type="reset"]:hover, input[type=
     padding-bottom: 15px;
     padding-top: 20px;
     background: rgba(50,182,122, 0.08);
+    display: block !important;
 }
 
 .wpte-bf-price-wrap .wpte-bf-price ins {
@@ -7406,68 +7407,103 @@ button:hover, input[type="button"]:hover, input[type="reset"]:hover, input[type=
 }
 
 .wpte-bf-datepicker .ui-datepicker-inline .ui-widget-header {
-    background: rgba(50,182,122, 0.07);
-    padding: 13px 0;
-    border-bottom: none;
+    background: rgba(50,182,122, 0.07) !important;
+    padding: 13px 0 !important;
+    border-bottom: none !important;
 }
 
 .wpte-bf-step-content .ui-datepicker table {
     font-size: 14px !important;
-    border: none;
-    background-color: #fff;
+    border: none !important;
+    background-color: #fff !important;
 }
 
 .wpte-bf-datepicker .ui-datepicker td a.ui-state-default {
-    background: rgba(50,182,122, 1);
-    color: #FFF;
+    background: rgba(50,182,122, 1) !important;
+    color: #FFF !important;
 }
 
+.wpte-bf-help-block {
+    background: #FFF !important;
+    font-size: 13px !important;
+    border-top: 1px solid rgba(50,182,122, 0.2) !important;
+    font-weight: 500 !important;
+    color: #232323 !important;
+}
+
+.secondary-trip-info .wte-trip-facts {
+    background: #f6f6f6;
+    border: 1px solid #d5d5d5;
+    border-radius: 5px;
+    padding: 30px;
+    margin: 50px 0 0;
+}
+
+.secondary-trip-info .wte-trip-facts .widget-title {
+    font-size: 14px;
+    line-height: 1.5em;
+    color: #111;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0 0 25px;
+}
+
+#secondary .trip-facts-value {
+    grid-row-gap: 10px;
+}
+
+ul:not(.browser-default)>li {
+    list-style-type: none;
+}
+
+
+
 .wpte-bf-step-content .wpte-bf-traveler-block .wpte-bf-traveler, .wpte-bf-step-content .wpte-bf-es-block .wpte-bf-traveler {
-    display: flex;
-    flex: initial;
-    align-items: center;
-    position: relative;
-    padding-right: 0px;
+    display: flex !important;
+    flex: initial !important;
+    align-items: center !important;
+    position: relative !important;
+    padding-right: 0px !important;
 }
 
 .wpte-bf-step-content .wpte-bf-number-field {
-    border: 1px solid rgba(50,182,122, 0.4);
-    width: 100px;
-    height: 40px;
+    border: 1px solid rgba(50,182,122, 0.4) !important;
+    width: 100px !important;
+    height: 40px !important;
 }
 
 .wpte-bf-step-content .wpte-bf-number-field button {
-    color: rgba(50,182,122, 1);
-    background: rgba(50,182,122, 0.03);
-    border: solid 1px rgba(50,182,122, 0.05);
+    color: rgba(50,182,122, 1) !important;
+    background: rgba(50,182,122, 0.03) !important;
+    border: solid 1px rgba(50,182,122, 0.05) !important;
 }
 
 .wpte-bf-step-content .wpte-bf-price ins {
-    color: rgba(50,182,122, 1);
-    font-size: 18px;
+    color: rgba(50,182,122, 1) !important;
+    font-size: 18px !important;
 }
 
 .wpte-bf-price-wrap {
-    padding: 0;
-    text-align: center;
+    padding: 0 !important;
+    text-align: center !important;
     /* background: rgba(50,182,122, 0.08); */
-    border-color: rgba(50,182,122, 0.05);
-    -webkit-box-shadow: none;
-    box-shadow: none;
+    border-color: rgba(50,182,122, 0.05) !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
 }
 
 .wpte-bf-price-wrap .wpte-bf-ptitle {
-    margin-top: 13px;
-    font-size: 14px;
-    font-weight: 600;
-    color: rgba(35,35,35,0.8);
-    display: block;
-    text-align: center;
+    margin-top: 13px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: rgba(35,35,35,0.8) !important;
+    display: block !important;
+    text-align: center !important;
 }
 
 .wpte-bf-step-content .wpte-bf-price .wpte-bf-pqty {
-    font-size: 12px;
-    display: inline-block;
-    line-height: 1;
+    font-size: 12px !important;
+    display: inline-block !important;
+    line-height: 1 !important;
 }
 
