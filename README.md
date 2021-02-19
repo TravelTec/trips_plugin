@@ -1,3 +1,3 @@
 # trips_plugin
 
-~Current Version:1.5.5~ 
+~Current Version:1.5.6~ 

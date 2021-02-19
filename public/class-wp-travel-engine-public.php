@@ -131,7 +131,9 @@ class Wp_Travel_Engine_Public {
 		$price                 = wp_travel_engine_get_actual_trip_price( $post_id );
 		$labels                = wte_multi_pricing_labels( $post_id );
 
-		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js' . $asset_script_path . 'wp-travel-engine-main' . $version_prefix . '.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'jquery-steps', 'jquery-validate', 'all', 'v4-shims', 'toastr', 'jquery-sticky-kit', 'parsley', 'magnific-popup', 'owl-carousel' ), $this->version, true );
+		if (strpos($_SERVER["REQUEST_URI"], "trip")) { 
+			wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js' . $asset_script_path . 'wp-travel-engine-main' . $version_prefix . '.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'jquery-steps', 'jquery-validate', 'all', 'v4-shims', 'toastr', 'jquery-sticky-kit', 'parsley', 'magnific-popup', 'owl-carousel' ), $this->version, true );
+		}
 
 		$wte_confirm = isset( $wte_settings['pages']['wp_travel_engine_confirmation_page'] ) ? esc_attr( $wte_settings['pages']['wp_travel_engine_confirmation_page'] ) : '';
 		$wte_confirm = get_permalink( $wte_confirm );
