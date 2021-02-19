@@ -318,7 +318,7 @@ class WP_Travel_Engine_Emails {
 
 					$per_pricing_price      = ( $cart_item['pax_cost'][ $pax_key ] / $pax );
 
-					$multiple_pricing_html .= '<p>' . $label . ': ' . $pax . 'X ' . $currency_code.' '.number_format(floatval($per_pricing_price).'.00', 2, ',', '.') . '</p>';
+					$multiple_pricing_html .= '<p><strong>' . $label . ' (' . $pax . ')</strong> <span style="position:relative;float:right;"> ' . $currency_code.' '.number_format(floatval($per_pricing_price).'.00', 2, ',', '.') . '</span></p>';
 
 				endforeach;
 
@@ -356,7 +356,9 @@ class WP_Travel_Engine_Emails {
 
 			'{phone}'                     => $order_details['place_order']['booking']['phone'],
 
-			'{traveler}'                  => $traveller.' '.$dados_travellers,
+			'{traveler}'                  => $dados_travellers,
+
+			'{cost_value}'                => $traveller,
 
 			'{child-traveler}'            => $child_traveller,
 
