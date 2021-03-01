@@ -34,36 +34,37 @@ class WTE_Process_Booking_Core {
 
 	public function process_booking() {
 
-		$curl = curl_init();
+		// $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.traveltec.com.br/serv/pagamento/listar_dados",
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_HTTPHEADER => array(
-            "cache-control: no-cache",
-            "content-type: application/json",
-            "postman-token: 82934c35-3bd1-7c2d-4c2e-53571acfe5fc",
-            "url: wp01.montenegroev.com.br"
-          ),
-        ));
+  //       curl_setopt_array($curl, array(
+  //         CURLOPT_URL => "https://api.traveltec.com.br/serv/pagamento/listar_dados",
+  //         CURLOPT_RETURNTRANSFER => true,
+  //         CURLOPT_ENCODING => "",
+  //         CURLOPT_MAXREDIRS => 10,
+  //         CURLOPT_TIMEOUT => 30,
+  //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  //         CURLOPT_CUSTOMREQUEST => "POST",
+  //         CURLOPT_HTTPHEADER => array(
+  //           "cache-control: no-cache",
+  //           "content-type: application/json",
+  //           "postman-token: 82934c35-3bd1-7c2d-4c2e-53571acfe5fc",
+  //           "url: wp01.montenegroev.com.br"
+  //         ),
+  //       ));
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+  //       $response = curl_exec($curl);
+  //       $err = curl_error($curl);
 
-        curl_close($curl);
+  //       curl_close($curl);
 
-        if ($err) {
-          echo "cURL Error #:" . $err;
-        } else {
-            $dados = json_decode($response, true);
-            $message = $dados['message']; 
-            $status_pagamento = $message['status'];
-        } 
+  //       if ($err) {
+  //         echo "cURL Error #:" . $err;
+  //       } else {
+  //           $dados = json_decode($response, true);
+  //           $message = $dados['message']; 
+  //           $status_pagamento = $message['status'];
+  //       } 
+		$status_pagamento = 0;
 
 		if (
 

@@ -34,6 +34,11 @@ Voucher Tec - Roteiros de viagens é um plugin de gerenciamento de viagens. Voc�
 
 == Changelog ==
 
+= 1.5.8 =
+
+* Chamada da função de reserva (pré reserva ou pagseguro) somente após receber os valores do checkout.
+
+
 = 1.5.7 =
 
 * Remoção da classe responsável pela reserva no formato Tailor Made.
