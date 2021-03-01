@@ -10,7 +10,7 @@ GitHub Plugin URI: https://github.com/TravelTec/trips_plugin
 
 Description: Voucher Tec - Roteiros de viagens é um plugin de gerenciamento de viagens. Você pode cadastrar seus roteiros, compartilhar promoções, gerenciar suas reservas e manter contato com os clientes que desejam saber mais sobre seus pacotes. Tudo de forma rápida e intuitiva. 
 
-Version: 1.5.6
+Version: 1.5.7
 
 Author: Travel Tec
 
@@ -80,7 +80,7 @@ function my_plugin_update_checker_setting() {
 
     // (Opcional) Set the branch that contains the stable release.
 
-    $myUpdateChecker->setBranch('main');
+    $myUpdateChecker->setBranch('vouchertec-roteiros-beta');
 
 }
 

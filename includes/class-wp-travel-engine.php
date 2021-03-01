@@ -513,7 +513,7 @@ class Wp_Travel_Engine {
 
 
 		include WP_TRAVEL_ENGINE_BASE_PATH . '/includes/class-wte-process-booking-core.php';
-		include WP_TRAVEL_ENGINE_BASE_PATH . '/includes/class-wte-process-booking-tailor.php';
+		//include WP_TRAVEL_ENGINE_BASE_PATH . '/includes/class-wte-process-booking-tailor.php';
 
 		include WP_TRAVEL_ENGINE_BASE_PATH . '/includes/class-wp-travel-engine-remaining-partial-payment.php';
 
@@ -843,7 +843,7 @@ class Wp_Travel_Engine {
 
 		$this->loader->add_action( 'wp_ajax_wpte_global_tabs_save_data', $plugin_admin, 'wpte_global_tabs_save_data_callback' );
 
-		$this->loader->add_action( 'wp_ajax_wpte_global_tabs_save_tailor', $plugin_admin, 'wpte_global_tabs_save_tailor_callback' );
+		//$this->loader->add_action( 'wp_ajax_wpte_global_tabs_save_tailor', $plugin_admin, 'wpte_global_tabs_save_tailor_callback' );
 
 		$this->loader->add_filter( 'admin_body_class', $plugin_admin, 'wpte_body_class_before_header_callback' );
 
@@ -880,7 +880,7 @@ class Wp_Travel_Engine {
 
 
 		$process_booking_core      = new WTE_Process_Booking_Core();
-		$process_booking_tailor      = new WTE_Process_Booking_Tailor();
+		//$process_booking_tailor      = new WTE_Process_Booking_Tailor();
 
 		$process_remaining_payment = new WTE_Process_Remaing_Payment();
 
@@ -892,7 +892,7 @@ class Wp_Travel_Engine {
 
 		$this->loader->add_action( 'init', $process_booking_core, 'process_booking', 99 );
 
-		$this->loader->add_action( 'init', $process_booking_tailor, 'process_booking_tailor', 99 );
+		//$this->loader->add_action( 'init', $process_booking_tailor, 'process_booking_tailor', 99 );
 
 
 
