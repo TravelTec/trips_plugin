@@ -10,7 +10,7 @@ Requires at least: 4.7
 
 Tested up to: 5.5
 
-Stable tag: 1.5.7
+Stable tag: 1.5.9
 
 Requires PHP: 5.4
 
