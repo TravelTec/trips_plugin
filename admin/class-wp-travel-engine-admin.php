@@ -1378,7 +1378,7 @@ class Wp_Travel_Engine_Admin
 
 			'new_item_name'     => __('Nome novo destino', 'wp-travel-engine'),
 
-			'menu_name'         => __('Locais', 'wp-travel-engine'),
+			'menu_name'         => __('Locais teste', 'wp-travel-engine'),
 
 		);
 
